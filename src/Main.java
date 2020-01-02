@@ -15,27 +15,12 @@ public class Main {
                     Jeu.nouvellePartie(nbJoueur);
                 }
                 else {
-                    throw new Exception("Error");
+                    throw new Exception();
                 }
             }catch (Exception e){
-                System.out.println("2, 3 ou 4 joueurs svp.");
+                System.out.println("Entrez 2, 3 ou 4.");
             }
         }
-    }
-
-
-    public static ArrayDeque<String> creationFile() {
-        ArrayDeque<String> instructions = new ArrayDeque<>();
-        String entree;
-        do {
-            System.out.print("\nSaisissez \n“A” pour avancer \n“G” pour faire un quart de tour vers la gauche \n“D” pour faire un quart de tour vers la droite.");
-            Scanner scanner = new Scanner(System.in);
-            entree = scanner.next();
-            if (entree.equals("A") || entree.equals("G") || entree.equals("D")) {
-                instructions.add(entree);
-            }
-        } while (instructions.size() < 5);
-        return instructions;
     }
 
     /*public static void deplacement(ArrayDeque<String> instructions, Tortue tortue) {

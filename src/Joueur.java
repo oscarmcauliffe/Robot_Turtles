@@ -44,8 +44,14 @@ public class Joueur {
     }
 
     public void completerMain(){
-        do{
-            this.main.add(this.pioche.poll());
-        }while (this.main.size() < 5);
+        if (this.main.size() < 5){
+            do{
+                this.main.add(this.pioche.poll());
+            } while (this.main.size() < 5);
+        }
+    }
+
+    public Carte getCarteMain(int i){
+        return this.main.get(i);
     }
 }

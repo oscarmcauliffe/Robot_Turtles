@@ -19,8 +19,16 @@ public class Jeu {
                 Joyau joyau = new Joyau(7, 3);
 
                 listeJoueurs = new Joueur[nombreJoueurs];
-                Joueur joueur1 = new Joueur("Oscar", rouge);
-                Joueur joueur2 = new Joueur("Thomas", bleu);
+
+                Scanner scanner = new Scanner(System.in);
+
+                System.out.println("\nSaisissez le nom du Joueur 1 :");
+                String j1 = scanner.next();
+                Joueur joueur1 = new Joueur(j1, rouge);
+
+                System.out.println("\nSaisissez le nom du Joueur 2 :");
+                String j2 = scanner.next();
+                Joueur joueur2 = new Joueur(j2, bleu);
                 listeJoueurs[0] = joueur1; listeJoueurs[1] = joueur2;
 
                 piocheObstacle = Obstacle.listeObstacles();
@@ -77,24 +85,39 @@ public class Jeu {
 
                 j.completerMain();
 
-                System.out.println("\nMain : ");
+                System.out.println("\nMain :");
                 for (Carte c : j.main){
                     System.out.println(c.type);
                 }
 
-
-                System.out.println("\n1. Ajouter au programme\n2. Executer le programme\n3. Placer un obstacle");
-                Scanner scanner = new Scanner(System.in);
-                switch (scanner.nextInt()){
-                    case 1: {
-                        break;
-                    }
-                    case 2: {
-                        break;
-                    }
-                    case 3:{
-                        placerObstacle();
-                        break;
+                boolean error = false;
+                while (!error) {
+                    try {
+                        System.out.println("\n1. Ajouter au programme\n2. Executer le programme\n3. Placer un obstacle");
+                        Scanner scanner = new Scanner(System.in);
+                        int choix = scanner.nextInt();
+                        switch (choix){
+                            case 1: {
+                                ajouterProgramme(j);
+                                error = true;
+                                break;
+                            }
+                            case 2: {
+                                executerProgramme(j);
+                                error = true;
+                                break;
+                            }
+                            case 3:{
+                                placerObstacle();
+                                error = true;
+                                break;
+                            }
+                            default:{
+                                throw new Exception();
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Entrez 1, 2 ou 3.");
                     }
                 }
             }
@@ -125,22 +148,46 @@ public class Jeu {
     }
 
     public static void placerObstacle(){
-        System.out.println("\nQuel type d'obstacle? (pierre/glace/caisse)");
-        Scanner scanner = new Scanner(System.in);
-        String choix = scanner.next();
-        if (containsObstacle(piocheObstacle, choix) == null){
-            System.out.println("\nAucun obstacle de ce type disponible.");
-        }
-        else{
-            System.out.println("\nOù le placer?\nLigne?");
-            int x = scanner.nextInt();
-            System.out.println("\nColonne?");
-            int y = scanner.nextInt();
+        boolean error = false;
+        while (!error){
+            try {
+                System.out.println("\nQuel type d'obstacle? (pierre/glace/caisse)");
+                Scanner scanner = new Scanner(System.in);
+                String choix = scanner.next();
 
-            if(Plateau.getTuile(x,y).nom.equals(null)){
+                Obstacle obstacle = containsObstacle(piocheObstacle, choix);
 
+                if (obstacle == null){
+                    System.out.println("\nAucun obstacle de ce type disponible.");
+                    throw new Exception();
+                }
+                else if (obstacle.nom.equals("pierre") || obstacle.nom.equals("glace") || obstacle.nom.equals("caisse")){
+                    System.out.println("\nOù le placer?\nLigne?");
+                    int x = scanner.nextInt();
+                    System.out.println("\nColonne?");
+                    int y = scanner.nextInt();
+
+                    System.out.println(Plateau.getTuile(x,y).nom);
+
+                    if(Plateau.getTuile(x,y).nom == null){
+                        piocheObstacle.remove(obstacle);
+                        Plateau.ajoutTuile(obstacle, x, y);
+                        Plateau.affichage();
+                        error = true;
+                    }
+                    else{
+                        System.out.println("\nCase occupée!");
+                        throw new Exception();
+                    }
+                }
+                else{
+                    throw new Exception();
+                }
+            } catch (Exception e){
+                System.out.println("\nVeuillez réessayer.");
             }
         }
+
     }
 
     public static Obstacle containsObstacle(ArrayList<Obstacle> pioche, String type){
@@ -150,5 +197,61 @@ public class Jeu {
             }
         }
         return null;
+    }
+
+    public static void ajouterProgramme(Joueur j){
+        boolean error = false;
+        while (!error){
+            try {
+                if (j.main.size() > 0){
+                    System.out.println("\nSélectionnez une carte de votre main.");
+                    Scanner scanner = new Scanner(System.in);
+                    int choix = scanner.nextInt();
+
+                    if (choix == 0 || choix == 1 || choix == 2 || choix == 3 || choix == 4){
+                        j.instructions.add(j.getCarteMain(choix));
+                        j.main.remove(j.getCarteMain(choix));
+
+                        System.out.println("\nMain :");
+                        for (Carte c : j.main){
+                            System.out.println(c.type);
+                        }
+
+                        boolean errorAjout = false;
+                        while (!errorAjout){
+                            try{
+                                System.out.println("\nVoulez-vous ajouter une autre carte?");
+                                String ajout = scanner.next();
+                                if (ajout.equals("Oui")){
+                                    errorAjout = true;
+                                }
+                                else if (ajout.equals("Non")){
+                                    errorAjout = true;
+                                    error = true;
+                                }
+                                else{
+                                    throw new Exception();
+                                }
+                            } catch (Exception e){
+                                System.out.println("\nVeuillez réessayer.");
+                            }
+                        }
+                    }
+                    else {
+                        throw new Exception();
+                    }
+                }
+                else{
+                    System.out.println("\nVous n'avez plus de cartes.");
+                    error = true;
+                }
+            } catch (Exception e){
+                System.out.println("\nVeuillez réessayer.");
+            }
+        }
+    }
+
+    public static void executerProgramme(Joueur j){
+
     }
 }
