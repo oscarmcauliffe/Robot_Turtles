@@ -6,10 +6,10 @@ public class Carte {
         type = t;
     }
 
-    public static void action(Carte c, Tortue t){
-        /*switch (c.type){
+    public void action(Tortue t){
+        switch (this.type){
             case "bleu":{
-                avancer(t.orientation);
+                avancer(t,t.orientation);
             }
             case "jaune":{
                 gauche(t.orientation);
@@ -18,9 +18,51 @@ public class Carte {
                 droite(t.orientation);
             }
             case "laser":{
-                laser(t.orientation);
             }
-        }*/
+        }
+    }
+
+    public static void avancer (Tortue t, int orientation){  /* rajouter le test mur */
+        switch (orientation){
+            case 1:{
+                if (Plateau.getPosition(t)[0] == 0){
+                    //retourne pt de départ
+                }
+                else{
+                    Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]);
+                    switch (devant.nom){
+                        case "joyaux":{
+                            //gagne
+                            break;
+                        }
+
+                        case "pierre":
+                        case "glace":
+                        case "caisse":{
+                            t.retourner();
+                            break;
+                        }
+
+                        case "vide":{
+                            break;
+                        }
+                        default:{
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+            case 2:{
+                break;
+            }
+            case 3:{
+                break;
+            }
+            case 4:{
+                break;
+            }
+        }
     }
 
     public static void droite (int orientation) { /* fonction qui prend en argument l'orientation et qui tourne la tortue vers la droite */
@@ -35,22 +77,6 @@ public class Carte {
         orientation -- ;
         if (orientation == 0) {
             orientation = 4 ;
-        }
-    }
-
-    public static void avancer (int[] position, int orientation) {  /* rajouter le test mur */
-        if (orientation == 1) {
-            position[0] --;
-
-        }
-        else if (orientation == 3) {
-            position[0] ++ ;
-        }
-        else if (orientation == 2) {
-            position[1] --;
-        }
-        else {
-            position[1] ++;
         }
     }
 

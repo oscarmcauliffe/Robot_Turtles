@@ -169,7 +169,7 @@ public class Jeu {
 
                     System.out.println(Plateau.getTuile(x,y).nom);
 
-                    if(Plateau.getTuile(x,y).nom == null){
+                    if(Plateau.getTuile(x,y).nom == "vide"){
                         piocheObstacle.remove(obstacle);
                         Plateau.ajoutTuile(obstacle, x, y);
                         Plateau.affichage();
@@ -252,6 +252,10 @@ public class Jeu {
     }
 
     public static void executerProgramme(Joueur j){
-
+        do{
+            Carte next = j.instructions.poll();
+            j.defausse.add(next);
+            next.action(j.tortue);
+        }while(j.instructions.size() > 0);
     }
 }
