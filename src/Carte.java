@@ -9,27 +9,30 @@ public class Carte {
     public void action(Tortue t){
         switch (this.type){
             case "bleu":{
-                avancer(t,t.orientation);
+                avancer(t);
             }
             case "jaune":{
-                gauche(t.orientation);
+                gauche(t);
             }
             case "violette":{
-                droite(t.orientation);
+                droite(t);
             }
             case "laser":{
+                laser(t);
             }
         }
     }
 
-    public static void avancer (Tortue t, int orientation){  /* rajouter le test mur */
-        switch (orientation){
+    private static void avancer (Tortue t){  /* rajouter le test mur */
+        System.out.println("ACTION");
+        switch (t.orientation){
             case 1:{
                 if (Plateau.getPosition(t)[0] == 0){
-                    //retourne pt de départ
+                    Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
                 }
                 else{
-                    Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]);
+                    Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]-1,Plateau.getPosition(t)[1]);
+                    System.out.println(devant.nom);
                     switch (devant.nom){
                         case "joyaux":{
                             //gagne
@@ -37,16 +40,24 @@ public class Carte {
                         }
 
                         case "pierre":
-                        case "glace":
-                        case "caisse":{
+                        case "glace":{
                             t.retourner();
                             break;
                         }
 
+                        case "caisse":{
+                            break;
+                        }
+
                         case "vide":{
+                            Plateau.deplacerTuile(t,Plateau.getPosition(t)[0]-1,Plateau.getPosition(t)[1]);
                             break;
                         }
                         default:{
+                            if(devant instanceof Tortue){
+                                Plateau.deplacerTuile(devant,((Tortue) devant).positiondepart[0],((Tortue) devant).positiondepart[1]);
+                                Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                            }
                             break;
                         }
                     }
@@ -54,56 +65,422 @@ public class Carte {
                 break;
             }
             case 2:{
+                if (Plateau.getPosition(t)[1] == 7){
+                    Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                }
+                else{
+                    Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]+1);
+                    System.out.println(devant.nom);
+                    switch (devant.nom){
+                        case "joyaux":{
+                            //gagne
+                            break;
+                        }
+
+                        case "pierre":
+                        case "glace":{
+                            t.retourner();
+                            break;
+                        }
+
+                        case "caisse":{
+                            break;
+                        }
+
+                        case "vide":{
+                            Plateau.deplacerTuile(t,Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]+1);
+                            break;
+                        }
+                        default:{
+                            if(devant instanceof Tortue){
+                                Plateau.deplacerTuile(devant,((Tortue) devant).positiondepart[0],((Tortue) devant).positiondepart[1]);
+                                Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                            }
+                            break;
+                        }
+                    }
+                }
                 break;
             }
             case 3:{
+                if (Plateau.getPosition(t)[0] == 7){
+                    Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                }
+                else{
+                    Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]+1,Plateau.getPosition(t)[1]);
+                    System.out.println(devant.nom);
+                    switch (devant.nom){
+                        case "joyaux":{
+                            //gagne
+                            break;
+                        }
+
+                        case "pierre":
+                        case "glace":{
+                            t.retourner();
+                            break;
+                        }
+
+                        case "caisse":{
+                            break;
+                        }
+
+                        case "vide":{
+                            Plateau.deplacerTuile(t,Plateau.getPosition(t)[0]+1,Plateau.getPosition(t)[1]);
+                            break;
+                        }
+                        default:{
+                            if(devant instanceof Tortue){
+                                Plateau.deplacerTuile(devant,((Tortue) devant).positiondepart[0],((Tortue) devant).positiondepart[1]);
+                                Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                            }
+                            break;
+                        }
+                    }
+                }
                 break;
             }
             case 4:{
+                if (Plateau.getPosition(t)[1] == 0){
+                    Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                }
+                else{
+                    Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]-1);
+                    System.out.println(devant.nom);
+                    switch (devant.nom){
+                        case "joyaux":{
+                            //gagne
+                            break;
+                        }
+
+                        case "pierre":
+                        case "glace":{
+                            t.retourner();
+                            break;
+                        }
+
+                        case "caisse":{
+                            break;
+                        }
+
+                        case "vide":{
+                            Plateau.deplacerTuile(t,Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]-1);
+                            break;
+                        }
+                        default:{
+                            if(devant instanceof Tortue){
+                                Plateau.deplacerTuile(devant,((Tortue) devant).positiondepart[0],((Tortue) devant).positiondepart[1]);
+                                Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                            }
+                            break;
+                        }
+                    }
+                }
                 break;
             }
         }
     }
 
-    public static void droite (int orientation) { /* fonction qui prend en argument l'orientation et qui tourne la tortue vers la droite */
-        orientation ++ ;
-        if (orientation == 5) {
-            orientation = 1 ;
+    private static void droite (Tortue t) { /* fonction qui prend en argument l'orientation et qui tourne la tortue vers la droite */
+        switch (t.orientation){
+            case 1:{
+                t.orientation = 2;
+                break;
+            }
+            case 2:{
+                t.orientation = 3;
+                break;
+            }
+            case 3:{
+                t.orientation = 4;
+                break;
+            }
+            case 4:{
+                t.orientation = 1;
+                break;
+            }
         }
-
     }
 
-    public static void gauche (int orientation) { /* fonction qui prend en argument l'orientation et qui tourne la tortue vers la droite */
-        orientation -- ;
-        if (orientation == 0) {
-            orientation = 4 ;
+    private static void gauche (Tortue t) { /* fonction qui prend en argument l'orientation et qui tourne la tortue vers la droite */
+        switch (t.orientation){
+            case 1:{
+                t.orientation = 4;
+                break;
+            }
+            case 2:{
+                t.orientation = 1;
+                break;
+            }
+            case 3:{
+                t.orientation = 2;
+                break;
+            }
+            case 4:{
+                t.orientation = 3;
+                break;
+            }
         }
     }
 
-    /*public static void laser (int[] position,int orientation,int[] plateau){ *//* identifer les tuiles *//*
-        if (orientation == 1) {
+    private static void laser (Tortue t){
+        switch (t.orientation){
+            case 1:{
+                int i = 1;
+                do{
+                    Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]-i,Plateau.getPosition(t)[1]);
+                    System.out.println(devant.nom);
+                    switch (devant.nom){
+                        case "joyaux":{
+                            switch (Jeu.listeJoueurs.length){
+                                case 2:{
+                                    t.retourner();
+                                    i=0;
+                                    break;
+                                }
+                                case 3:
+                                case 4:{
+                                    Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                                    i=0;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
 
-            for (int i=position[0]; i>-1; i--){
-                if (plateau[i].contains("P"){ *//* trouver comment identifier les tuiles sur le plateau *//*
+                        case "pierre":{
+                            i=0;
+                            break;
+                        }
 
-                }
-                else if (plateau[i]==)
+                        case "glace":{
+                            Plateau.plateau[Plateau.getPosition(t)[0]-i][Plateau.getPosition(t)[1]] = new Tuile();
+                            i=0;
+                            break;
+                        }
+
+                        case "caisse":{
+                            break;
+                        }
+
+                        case "vide":{
+                            i++;
+                        }
+
+                        default:{
+                            if(devant instanceof Tortue){
+                                switch (Jeu.listeJoueurs.length){
+                                    case 2:{
+                                        t.retourner();
+                                        i=0;
+                                        break;
+                                    }
+                                    case 3:
+                                    case 4:{
+                                        Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                                        i=0;
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }while (i!=0);
+                break;
+            }
+            case 2:{
+                int i = 1;
+                do{
+                    Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]+i);
+                    System.out.println(devant.nom);
+                    switch (devant.nom){
+                        case "joyaux":{
+                            switch (Jeu.listeJoueurs.length){
+                                case 2:{
+                                    t.retourner();
+                                    i=0;
+                                    break;
+                                }
+                                case 3:
+                                case 4:{
+                                    Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                                    i=0;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+
+                        case "pierre":{
+                            i=0;
+                            break;
+                        }
+
+                        case "glace":{
+                            Plateau.plateau[Plateau.getPosition(t)[0]][Plateau.getPosition(t)[1]+i] = new Tuile();
+                            i=0;
+                            break;
+                        }
+
+                        case "caisse":{
+                            break;
+                        }
+
+                        case "vide":{
+                            i++;
+                        }
+
+                        default:{
+                            if(devant instanceof Tortue){
+                                switch (Jeu.listeJoueurs.length){
+                                    case 2:{
+                                        t.retourner();
+                                        i=0;
+                                        break;
+                                    }
+                                    case 3:
+                                    case 4:{
+                                        Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                                        i=0;
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }while (i!=0);
+                break;
+            }
+            case 3:{
+                int i = 1;
+                do{
+                    Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]+i,Plateau.getPosition(t)[1]);
+                    System.out.println(devant.nom);
+                    switch (devant.nom){
+                        case "joyaux":{
+                            switch (Jeu.listeJoueurs.length){
+                                case 2:{
+                                    t.retourner();
+                                    i=0;
+                                    break;
+                                }
+                                case 3:
+                                case 4:{
+                                    Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                                    i=0;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+
+                        case "pierre":{
+                            i=0;
+                            break;
+                        }
+
+                        case "glace":{
+                            Plateau.plateau[Plateau.getPosition(t)[0]+i][Plateau.getPosition(t)[1]] = new Tuile();
+                            i=0;
+                            break;
+                        }
+
+                        case "caisse":{
+                            break;
+                        }
+
+                        case "vide":{
+                            i++;
+                        }
+
+                        default:{
+                            if(devant instanceof Tortue){
+                                switch (Jeu.listeJoueurs.length){
+                                    case 2:{
+                                        t.retourner();
+                                        i=0;
+                                        break;
+                                    }
+                                    case 3:
+                                    case 4:{
+                                        Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                                        i=0;
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }while (i!=0);
+                break;
+            }
+            case 4:{
+                int i = 1;
+                do{
+                    Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]-i);
+                    System.out.println(devant.nom);
+                    switch (devant.nom){
+                        case "joyaux":{
+                            switch (Jeu.listeJoueurs.length){
+                                case 2:{
+                                    t.retourner();
+                                    i=0;
+                                    break;
+                                }
+                                case 3:
+                                case 4:{
+                                    Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                                    i=0;
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+
+                        case "pierre":{
+                            i=0;
+                            break;
+                        }
+
+                        case "glace":{
+                            Plateau.plateau[Plateau.getPosition(t)[0]][Plateau.getPosition(t)[1]-i] = new Tuile();
+                            i=0;
+                            break;
+                        }
+
+                        case "caisse":{
+                            break;
+                        }
+
+                        case "vide":{
+                            i++;
+                        }
+
+                        default:{
+                            if(devant instanceof Tortue){
+                                switch (Jeu.listeJoueurs.length){
+                                    case 2:{
+                                        t.retourner();
+                                        i=0;
+                                        break;
+                                    }
+                                    case 3:
+                                    case 4:{
+                                        Plateau.deplacerTuile(t,t.positiondepart[0],t.positiondepart[1]);
+                                        i=0;
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }while (i!=0);
+                break;
             }
         }
-        else if (orientation == 3) {
-            for (int i=position[0]; i<9; i++){
-
-            }
-        }
-        else if (orientation == 2) {
-            for (int i=position[1]; i>-1; i--){
-
-            }
-        }
-        else {
-            for (int i=position[1]; i<9; i++){
-
-            }
-        }
-    }*/
+    }
 }

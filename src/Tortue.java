@@ -6,7 +6,7 @@ public class Tortue extends Tuile{
 
     public Tortue(String n, int x, int y){
         nom = n;
-        orientation = 1;
+        orientation = 3;
         positiondepart = new int[2];
         positiondepart[0] = x;
         positiondepart[1] = y;

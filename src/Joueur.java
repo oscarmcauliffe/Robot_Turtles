@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ public class Joueur {
     int score;
     Tortue tortue;
     ArrayDeque<Carte> pioche;
+    ArrayList<Obstacle> piocheObstacle;
     ArrayList<Carte> main;
     ArrayDeque<Carte> instructions;
     ArrayList<Carte> defausse;
@@ -21,6 +23,7 @@ public class Joueur {
         main = new ArrayList<>();
         instructions = new ArrayDeque<>();
         defausse = new ArrayList<>();
+        piocheObstacle = Obstacle.listeObstacles();
     }
 
     public ArrayDeque<Carte> nouvellePioche(){
@@ -46,7 +49,16 @@ public class Joueur {
     public void completerMain(){
         if (this.main.size() < 5){
             do{
-                this.main.add(this.pioche.poll());
+                if (pioche.size() == 0){
+                    Collections.shuffle(defausse);
+                    pioche = new ArrayDeque<>(defausse);
+                    for (Carte c : defausse){
+                        defausse.remove(c);
+                    }
+                }
+                else {
+                    this.main.add(this.pioche.poll());
+                }
             } while (this.main.size() < 5);
         }
     }

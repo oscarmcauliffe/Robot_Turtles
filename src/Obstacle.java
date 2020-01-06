@@ -27,13 +27,13 @@ public class Obstacle extends Tuile{
 
     public static ArrayList<Obstacle> listeObstacles(){
         ArrayList<Obstacle> oJ = new ArrayList();
-        for (int i = 0; i < 20; i++){
+        for (int i = 0; i < 3; i++){
             oJ.add(new Obstacle("pierre"));
         }
-        for (int i = 0; i < 12; i++){
+        for (int i = 0; i < 2; i++){
             oJ.add(new Obstacle("glace"));
         }
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < 1; i++){
             oJ.add(new Obstacle("caisse"));
         }
         return oJ;
