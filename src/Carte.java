@@ -10,21 +10,24 @@ public class Carte {
         switch (this.type){
             case "bleu":{
                 avancer(t);
+                break;
             }
             case "jaune":{
                 gauche(t);
+                break;
             }
             case "violette":{
                 droite(t);
+                break;
             }
             case "laser":{
                 laser(t);
+                break;
             }
         }
     }
 
-    private static void avancer (Tortue t){  /* rajouter le test mur */
-        System.out.println("ACTION");
+    private static void avancer (Tortue t){
         switch (t.orientation){
             case 1:{
                 if (Plateau.getPosition(t)[0] == 0){
@@ -32,10 +35,9 @@ public class Carte {
                 }
                 else{
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]-1,Plateau.getPosition(t)[1]);
-                    System.out.println(devant.nom);
                     switch (devant.nom){
-                        case "joyaux":{
-                            //gagne
+                        case "joyau":{
+                            //Jeu.joueurGagnant = Jeu.joueurActuel;
                             break;
                         }
 
@@ -70,10 +72,9 @@ public class Carte {
                 }
                 else{
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]+1);
-                    System.out.println(devant.nom);
                     switch (devant.nom){
-                        case "joyaux":{
-                            //gagne
+                        case "joyau":{
+                            //Jeu.joueurGagnant = Jeu.joueurActuel;
                             break;
                         }
 
@@ -108,10 +109,9 @@ public class Carte {
                 }
                 else{
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]+1,Plateau.getPosition(t)[1]);
-                    System.out.println(devant.nom);
                     switch (devant.nom){
-                        case "joyaux":{
-                            //gagne
+                        case "joyau":{
+                            System.out.println(Jeu.joueurActuel + "a gagné");
                             break;
                         }
 
@@ -146,10 +146,9 @@ public class Carte {
                 }
                 else{
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]-1);
-                    System.out.println(devant.nom);
                     switch (devant.nom){
-                        case "joyaux":{
-                            //gagne
+                        case "joyau":{
+                            //Jeu.joueurGagnant = Jeu.joueurActuel;
                             break;
                         }
 
@@ -229,7 +228,6 @@ public class Carte {
                 int i = 1;
                 do{
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]-i,Plateau.getPosition(t)[1]);
-                    System.out.println(devant.nom);
                     switch (devant.nom){
                         case "joyaux":{
                             switch (Jeu.listeJoueurs.length){
@@ -293,7 +291,6 @@ public class Carte {
                 int i = 1;
                 do{
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]+i);
-                    System.out.println(devant.nom);
                     switch (devant.nom){
                         case "joyaux":{
                             switch (Jeu.listeJoueurs.length){
@@ -357,7 +354,6 @@ public class Carte {
                 int i = 1;
                 do{
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]+i,Plateau.getPosition(t)[1]);
-                    System.out.println(devant.nom);
                     switch (devant.nom){
                         case "joyaux":{
                             switch (Jeu.listeJoueurs.length){
@@ -421,7 +417,6 @@ public class Carte {
                 int i = 1;
                 do{
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]-i);
-                    System.out.println(devant.nom);
                     switch (devant.nom){
                         case "joyaux":{
                             switch (Jeu.listeJoueurs.length){
