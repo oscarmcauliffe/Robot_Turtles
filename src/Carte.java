@@ -1,4 +1,3 @@
-
 public class Carte {
     String type;        //bleu, jaune, violette, laser
 
@@ -37,7 +36,8 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]-1,Plateau.getPosition(t)[1]);
                     switch (devant.nom){
                         case "joyau":{
-                            //Jeu.joueurGagnant = Jeu.joueurActuel;
+                            System.out.println(Jeu.joueurActuel.nom + " a gagné!");
+                            Jeu.listeJoueurs.remove(Jeu.joueurActuel);
                             break;
                         }
 
@@ -74,7 +74,8 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]+1);
                     switch (devant.nom){
                         case "joyau":{
-                            //Jeu.joueurGagnant = Jeu.joueurActuel;
+                            System.out.println(Jeu.joueurActuel.nom + "ca gagné!");
+                            Jeu.listeJoueurs.remove(Jeu.joueurActuel);
                             break;
                         }
 
@@ -111,7 +112,8 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]+1,Plateau.getPosition(t)[1]);
                     switch (devant.nom){
                         case "joyau":{
-                            System.out.println(Jeu.joueurActuel + "a gagné");
+                            System.out.println(Jeu.joueurActuel.nom + " a gagné!");
+                            Jeu.listeJoueurs.remove(Jeu.joueurActuel);
                             break;
                         }
 
@@ -148,7 +150,8 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]-1);
                     switch (devant.nom){
                         case "joyau":{
-                            //Jeu.joueurGagnant = Jeu.joueurActuel;
+                            System.out.println(Jeu.joueurActuel.nom + " a gagné!");
+                            Jeu.listeJoueurs.remove(Jeu.joueurActuel);
                             break;
                         }
 
@@ -180,7 +183,7 @@ public class Carte {
         }
     }
 
-    private static void droite (Tortue t) { /* fonction qui prend en argument l'orientation et qui tourne la tortue vers la droite */
+    private static void droite (Tortue t) {
         switch (t.orientation){
             case 1:{
                 t.orientation = 2;
@@ -201,7 +204,7 @@ public class Carte {
         }
     }
 
-    private static void gauche (Tortue t) { /* fonction qui prend en argument l'orientation et qui tourne la tortue vers la droite */
+    private static void gauche (Tortue t) {
         switch (t.orientation){
             case 1:{
                 t.orientation = 4;
@@ -230,7 +233,7 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]-i,Plateau.getPosition(t)[1]);
                     switch (devant.nom){
                         case "joyaux":{
-                            switch (Jeu.listeJoueurs.length){
+                            switch (Jeu.listeJoueurs.size()){
                                 case 2:{
                                     t.retourner();
                                     i=0;
@@ -267,7 +270,7 @@ public class Carte {
 
                         default:{
                             if(devant instanceof Tortue){
-                                switch (Jeu.listeJoueurs.length){
+                                switch (Jeu.listeJoueurs.size()){
                                     case 2:{
                                         t.retourner();
                                         i=0;
@@ -293,7 +296,7 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]+i);
                     switch (devant.nom){
                         case "joyaux":{
-                            switch (Jeu.listeJoueurs.length){
+                            switch (Jeu.listeJoueurs.size()){
                                 case 2:{
                                     t.retourner();
                                     i=0;
@@ -330,7 +333,7 @@ public class Carte {
 
                         default:{
                             if(devant instanceof Tortue){
-                                switch (Jeu.listeJoueurs.length){
+                                switch (Jeu.listeJoueurs.size()){
                                     case 2:{
                                         t.retourner();
                                         i=0;
@@ -356,7 +359,7 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0]+i,Plateau.getPosition(t)[1]);
                     switch (devant.nom){
                         case "joyaux":{
-                            switch (Jeu.listeJoueurs.length){
+                            switch (Jeu.listeJoueurs.size()){
                                 case 2:{
                                     t.retourner();
                                     i=0;
@@ -393,7 +396,7 @@ public class Carte {
 
                         default:{
                             if(devant instanceof Tortue){
-                                switch (Jeu.listeJoueurs.length){
+                                switch (Jeu.listeJoueurs.size()){
                                     case 2:{
                                         t.retourner();
                                         i=0;
@@ -419,7 +422,7 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]-i);
                     switch (devant.nom){
                         case "joyaux":{
-                            switch (Jeu.listeJoueurs.length){
+                            switch (Jeu.listeJoueurs.size()){
                                 case 2:{
                                     t.retourner();
                                     i=0;
@@ -456,7 +459,7 @@ public class Carte {
 
                         default:{
                             if(devant instanceof Tortue){
-                                switch (Jeu.listeJoueurs.length){
+                                switch (Jeu.listeJoueurs.size()){
                                     case 2:{
                                         t.retourner();
                                         i=0;

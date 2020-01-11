@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.concurrent.SynchronousQueue;
 
 public class Jeu {
-    public static Joueur[] listeJoueurs;
+    public static ArrayList<Joueur> listeJoueurs;
     public static Joueur joueurActuel;
 
     public static void nouvellePartie(int nombreJoueurs) {
@@ -17,9 +17,9 @@ public class Jeu {
                 Tortue rouge = new Tortue("rouge", 0, 1);
                 Tortue bleu = new Tortue("bleu", 0, 5);
 
-                Joyau joyau = new Joyau(1, 1);
+                Joyau joyau = new Joyau(7, 3);
 
-                listeJoueurs = new Joueur[nombreJoueurs];
+                listeJoueurs = new ArrayList<>();
 
                 Scanner scanner = new Scanner(System.in);
 
@@ -30,8 +30,9 @@ public class Jeu {
                 System.out.println("\nSaisissez le nom du Joueur 2 :");
                 String j2 = scanner.next();
                 Joueur joueur2 = new Joueur(j2, bleu);
-                listeJoueurs[0] = joueur1;
-                listeJoueurs[1] = joueur2;
+                listeJoueurs.add(joueur1);
+                listeJoueurs.add(joueur2);
+
 
                 tourJoueur();
                 break;
@@ -48,7 +49,7 @@ public class Jeu {
                 Joyau joyau2 = new Joyau(7, 3);
                 Joyau joyau3 = new Joyau(7, 6);
 
-                listeJoueurs = new Joueur[nombreJoueurs];
+                listeJoueurs = new ArrayList<>();
 
                 Plateau.affichage();
                 break;
@@ -64,7 +65,7 @@ public class Jeu {
                 Joyau joyau1 = new Joyau(7, 1);
                 Joyau joyau2 = new Joyau(7, 6);
 
-                listeJoueurs = new Joueur[nombreJoueurs];
+                listeJoueurs = new ArrayList<>();
 
                 Plateau.affichage();
                 break;
@@ -73,7 +74,7 @@ public class Jeu {
     }
 
     public static void tourJoueur() {
-        while (listeJoueurs.length > 1) {
+        while (listeJoueurs.size() > 1) {
             for (Joueur j : listeJoueurs) {
                 joueurActuel = j;
 
@@ -131,7 +132,7 @@ public class Jeu {
                 }
             }
         }
-        System.out.println(listeJoueurs[0].nom + " a perdu!");
+        System.out.println(listeJoueurs.get(0).nom + " a perdu!");
     }
 
     private static void countListeObstacle(Joueur j) {
