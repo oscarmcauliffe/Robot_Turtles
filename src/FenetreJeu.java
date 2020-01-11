@@ -76,12 +76,26 @@ public class FenetreJeu extends JFrame {
             //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
             items.add(pileProgramme);
 
+            JPanel compteurProgramme = new JPanel();
+            compteurProgramme.setLayout( null );
+            compteurProgramme.setBounds(140, 530, 50, 30);
+            compteurProgramme.setBackground(Color.BLACK);
+            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+            items.add(compteurProgramme);
+
             JPanel pilePierre = new JPanel();
             pilePierre.setLayout( null );
             pilePierre.setBounds(25, 40, 100, 50);
             pilePierre.setBackground(Color.BLACK);
             //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
             items.add(pilePierre);
+
+            JPanel compteurPierre = new JPanel();
+            compteurPierre.setLayout( null );
+            compteurPierre.setBounds(140, 50, 50, 30);
+            compteurPierre.setBackground(Color.BLACK);
+            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+            items.add(compteurPierre);
 
             JPanel pileGlace = new JPanel();
             pileGlace.setLayout( null );
@@ -90,12 +104,27 @@ public class FenetreJeu extends JFrame {
             //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
             items.add(pileGlace);
 
+            JPanel compteurGlace = new JPanel();
+            compteurGlace.setLayout( null );
+            compteurGlace.setBounds(140, 140, 50, 30);
+            compteurGlace.setBackground(Color.BLACK);
+            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+            items.add(compteurGlace);
+
             JPanel pileCaisse= new JPanel();
             pileCaisse.setLayout( null );
             pileCaisse.setBounds(25, 220, 100, 50);
             pileCaisse.setBackground(Color.BLACK);
             //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
             items.add(pileCaisse);
+
+            JPanel compteurCaisse = new JPanel();
+            compteurCaisse.setLayout( null );
+            compteurCaisse.setBounds(140, 230, 50, 30);
+            compteurCaisse.setBackground(Color.BLACK);
+            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+            items.add(compteurCaisse);
+
 
             JPanel actions = new JPanel();
             actions.setLayout( null );
