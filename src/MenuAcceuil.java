@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 
             JPanel pageAcceuil = new JPanel() ;     // permet d'acceder a la zone principal de la fenetre
             pageAcceuil.setLayout( null );
-
             pageAcceuil.setBackground(Color.BLACK);
             pageAcceuil.setBounds(0, 0, 600, 400);
 
@@ -24,7 +23,7 @@ import java.awt.event.ActionListener;
             JPanel pageNbrJ = new JPanel();
             pageNbrJ.setLayout( null );
             pageNbrJ.setBounds(0, 0, 600, 400);
-            pageAcceuil.setBackground(Color.white);
+            pageNbrJ.setBackground(Color.LIGHT_GRAY);
 
             this.add(pageNbrJ);
 
