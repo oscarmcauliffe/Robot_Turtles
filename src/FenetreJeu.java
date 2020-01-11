@@ -37,6 +37,27 @@ public class FenetreJeu extends JFrame {
             actions.setBounds(0, 220, 320, 420);
             actions.setBorder(BorderFactory.createLineBorder(Color.black));
             this.add(actions);
+
+            JButton btnPlacer = new JButton( "Placer" );
+            btnPlacer.setBounds(85,15,150,64);
+
+            JButton btnAjouter = new JButton( "Ajouter" );
+            btnAjouter.setBounds(85,99,150,64);
+
+            JButton btnExecuter = new JButton( "Executer" );
+            btnExecuter.setBounds(85,183,150,64);
+
+            JButton btnDefausser = new JButton( "Defausser" );
+            btnDefausser.setBounds(85,267,150,64);
+
+            JButton btnPasser = new JButton( "Passer" );
+            btnPasser.setBounds(85,351,150,64);
+
+            actions.add(btnPlacer);
+            actions.add(btnAjouter);
+            actions.add(btnExecuter);
+            actions.add(btnDefausser);
+            actions.add(btnPasser);
         }
 
         public static void main (String[] args) throws Exception {
