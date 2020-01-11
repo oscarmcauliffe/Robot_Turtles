@@ -140,7 +140,7 @@ public class Jeu {
         int g = 0;
         int c = 0;
         for (Obstacle o : j.piocheObstacle) {
-            switch (o.type) {
+            switch (o.nom) {
                 case "pierre": {
                     p++;
                     break;
@@ -201,7 +201,7 @@ public class Jeu {
 
     private static Obstacle containsObstacle(ArrayList<Obstacle> pioche, String type) {
         for (Obstacle o : pioche) {
-            if (o.type.equals(type)) {
+            if (o.nom.equals(type)) {
                 return o;
             }
         }
