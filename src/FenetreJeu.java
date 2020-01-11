@@ -14,11 +14,29 @@ public class FenetreJeu extends JFrame {
             this.getContentPane().setLayout(null);
 
 
+            JPanel hand = new JPanel();
+            hand.setLayout( null );
+            hand.setBounds(368, 530, 500, 150);
+            hand.setBackground(Color.BLACK);
+            this.add(hand);
+
             JPanel plateau = new JPanel();
             plateau.setLayout( null );
-            plateau.setBounds(434, 530, 434, 150);
+            plateau.setBounds(368, 25, 500, 450);
             plateau.setBackground(Color.BLACK);
             this.add(plateau);
+
+            JPanel items = new JPanel();
+            items.setLayout( null );
+            items.setBounds(932, 0, 368, 681);
+            items.setBackground(Color.BLACK);
+            this.add(items);
+
+            JPanel actions = new JPanel();
+            actions.setLayout( null );
+            actions.setBounds(0, 220, 318, 425);
+            actions.setBackground(Color.BLACK);
+            this.add(actions);
         }
 
         public static void main (String[] args) throws Exception {
