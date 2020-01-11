@@ -16,26 +16,26 @@ public class FenetreJeu extends JFrame {
 
             JPanel hand = new JPanel();
             hand.setLayout( null );
-            hand.setBounds(368, 530, 500, 150);
-            hand.setBackground(Color.BLACK);
+            hand.setBounds(368, 510, 500, 130);
+            hand.setBorder(BorderFactory.createLineBorder(Color.black));
             this.add(hand);
 
             JPanel plateau = new JPanel();
             plateau.setLayout( null );
-            plateau.setBounds(368, 25, 500, 450);
-            plateau.setBackground(Color.BLACK);
+            plateau.setBounds(368, 0, 500, 500);
+            plateau.setBorder(BorderFactory.createLineBorder(Color.black));
             this.add(plateau);
 
             JPanel items = new JPanel();
             items.setLayout( null );
-            items.setBounds(932, 0, 368, 681);
-            items.setBackground(Color.BLACK);
+            items.setBounds(932, 0, 338, 640);
+            items.setBorder(BorderFactory.createLineBorder(Color.black));
             this.add(items);
 
             JPanel actions = new JPanel();
             actions.setLayout( null );
-            actions.setBounds(0, 220, 318, 425);
-            actions.setBackground(Color.BLACK);
+            actions.setBounds(0, 220, 320, 420);
+            actions.setBorder(BorderFactory.createLineBorder(Color.black));
             this.add(actions);
         }
 
