@@ -20,48 +20,51 @@ public class FenetreJeu extends JFrame {
             hand.setBorder(BorderFactory.createLineBorder(Color.black));
             this.add(hand);
 
-            //debut des panels contenus dans hand
-            JPanel carte1 = new JPanel();
-            carte1.setLayout( null );
-            carte1.setBounds(10, 5, 88, 125);
-            carte1.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            hand.add(carte1);
+                    //debut des panels contenus dans hand
+                    JPanel carte1 = new JPanel();
+                    carte1.setLayout( null );
+                    carte1.setBounds(10, 5, 88, 125);
+                    carte1.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    hand.add(carte1);
 
-            JPanel carte2 = new JPanel();
-            carte2.setLayout( null );
-            carte2.setBounds(108, 5, 88, 125);
-            carte2.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            hand.add(carte2);
+                    JPanel carte2 = new JPanel();
+                    carte2.setLayout( null );
+                    carte2.setBounds(108, 5, 88, 125);
+                    carte2.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    hand.add(carte2);
 
-            JPanel carte3 = new JPanel();
-            carte3.setLayout( null );
-            carte3.setBounds(206, 5, 88, 125);
-            carte3.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            hand.add(carte3);
+                    JPanel carte3 = new JPanel();
+                    carte3.setLayout( null );
+                    carte3.setBounds(206, 5, 88, 125);
+                    carte3.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    hand.add(carte3);
 
-            JPanel carte4 = new JPanel();
-            carte4.setLayout( null );
-            carte4.setBounds(304, 5, 88, 125);
-            carte4.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            hand.add(carte4);
+                    JPanel carte4 = new JPanel();
+                    carte4.setLayout( null );
+                    carte4.setBounds(304, 5, 88, 125);
+                    carte4.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    hand.add(carte4);
 
-            JPanel carte5 = new JPanel();
-            carte5.setLayout( null );
-            carte5.setBounds(402, 5, 88, 125);
-            carte5.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            hand.add(carte5);
-            //fin des panels contenus dans hand
+                    JPanel carte5 = new JPanel();
+                    carte5.setLayout( null );
+                    carte5.setBounds(402, 5, 88, 125);
+                    carte5.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    hand.add(carte5);
+                    //fin des panels contenus dans hand
 
             JPanel plateau = new JPanel();
             plateau.setLayout( null );
-            plateau.setBounds(368, 0, 500, 500);
+            plateau.setBounds(368, 0, 496,  496);
             plateau.setBorder(BorderFactory.createLineBorder(Color.black));
             this.add(plateau);
+
+
+
 
             JPanel items = new JPanel();
             items.setLayout( null );
@@ -69,61 +72,61 @@ public class FenetreJeu extends JFrame {
             items.setBorder(BorderFactory.createLineBorder(Color.black));
             this.add(items);
 
-            JPanel pileProgramme = new JPanel();
-            pileProgramme.setLayout( null );
-            pileProgramme.setBounds(25, 470, 100, 150);
-            pileProgramme.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            items.add(pileProgramme);
+                    JPanel pileProgramme = new JPanel();
+                    pileProgramme.setLayout( null );
+                    pileProgramme.setBounds(25, 470, 100, 150);
+                    pileProgramme.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    items.add(pileProgramme);
 
-            JPanel compteurProgramme = new JPanel();
-            compteurProgramme.setLayout( null );
-            compteurProgramme.setBounds(140, 530, 50, 30);
-            compteurProgramme.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            items.add(compteurProgramme);
+                    JPanel compteurProgramme = new JPanel();
+                    compteurProgramme.setLayout( null );
+                    compteurProgramme.setBounds(140, 530, 50, 30);
+                    compteurProgramme.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    items.add(compteurProgramme);
 
-            JPanel pilePierre = new JPanel();
-            pilePierre.setLayout( null );
-            pilePierre.setBounds(25, 40, 100, 50);
-            pilePierre.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            items.add(pilePierre);
+                    JPanel pilePierre = new JPanel();
+                    pilePierre.setLayout( null );
+                    pilePierre.setBounds(25, 40, 100, 50);
+                    pilePierre.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    items.add(pilePierre);
 
-            JPanel compteurPierre = new JPanel();
-            compteurPierre.setLayout( null );
-            compteurPierre.setBounds(140, 50, 50, 30);
-            compteurPierre.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            items.add(compteurPierre);
+                    JPanel compteurPierre = new JPanel();
+                    compteurPierre.setLayout( null );
+                    compteurPierre.setBounds(140, 50, 50, 30);
+                    compteurPierre.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    items.add(compteurPierre);
 
-            JPanel pileGlace = new JPanel();
-            pileGlace.setLayout( null );
-            pileGlace.setBounds(25, 130, 100, 50);
-            pileGlace.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            items.add(pileGlace);
+                    JPanel pileGlace = new JPanel();
+                    pileGlace.setLayout( null );
+                    pileGlace.setBounds(25, 130, 100, 50);
+                    pileGlace.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    items.add(pileGlace);
 
-            JPanel compteurGlace = new JPanel();
-            compteurGlace.setLayout( null );
-            compteurGlace.setBounds(140, 140, 50, 30);
-            compteurGlace.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            items.add(compteurGlace);
+                    JPanel compteurGlace = new JPanel();
+                    compteurGlace.setLayout( null );
+                    compteurGlace.setBounds(140, 140, 50, 30);
+                    compteurGlace.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    items.add(compteurGlace);
 
-            JPanel pileCaisse= new JPanel();
-            pileCaisse.setLayout( null );
-            pileCaisse.setBounds(25, 220, 100, 50);
-            pileCaisse.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            items.add(pileCaisse);
+                    JPanel pileCaisse= new JPanel();
+                    pileCaisse.setLayout( null );
+                    pileCaisse.setBounds(25, 220, 100, 50);
+                    pileCaisse.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    items.add(pileCaisse);
 
-            JPanel compteurCaisse = new JPanel();
-            compteurCaisse.setLayout( null );
-            compteurCaisse.setBounds(140, 230, 50, 30);
-            compteurCaisse.setBackground(Color.BLACK);
-            //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-            items.add(compteurCaisse);
+                    JPanel compteurCaisse = new JPanel();
+                    compteurCaisse.setLayout( null );
+                    compteurCaisse.setBounds(140, 230, 50, 30);
+                    compteurCaisse.setBackground(Color.BLACK);
+                    //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
+                    items.add(compteurCaisse);
 
 
             JPanel actions = new JPanel();
@@ -132,20 +135,20 @@ public class FenetreJeu extends JFrame {
             actions.setBorder(BorderFactory.createLineBorder(Color.black));
             this.add(actions);
 
-            JButton btnPlacer = new JButton( "Placer" );
-            btnPlacer.setBounds(85,15 ,150,64);
+                    JButton btnPlacer = new JButton( "Placer" );
+                    btnPlacer.setBounds(85,15 ,150,64);
 
-            JButton btnAjouter = new JButton( "Ajouter" );
-            btnAjouter.setBounds(85,99,150,64);
+                    JButton btnAjouter = new JButton( "Ajouter" );
+                    btnAjouter.setBounds(85,99,150,64);
 
-            JButton btnExecuter = new JButton( "Executer" );
-            btnExecuter.setBounds(85,183,150,64);
+                    JButton btnExecuter = new JButton( "Executer" );
+                    btnExecuter.setBounds(85,183,150,64);
 
-            JButton btnDefausser = new JButton( "Defausser" );
-            btnDefausser.setBounds(85,267,150,64);
+                    JButton btnDefausser = new JButton( "Defausser" );
+                    btnDefausser.setBounds(85,267,150,64);
 
-            JButton btnPasser = new JButton( "Passer" );
-            btnPasser.setBounds(85,351,150,64);
+                    JButton btnPasser = new JButton( "Passer" );
+                    btnPasser.setBounds(85,351,150,64);
 
             actions.add(btnPlacer);
             actions.add(btnAjouter);
