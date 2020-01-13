@@ -1,6 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.io.File;
+import java.io.IOException;
 
 public class FenetreJeu extends JFrame {
 
@@ -57,7 +62,16 @@ public class FenetreJeu extends JFrame {
                     hand.add(carte5);
                     //fin des panels contenus dans hand
 
-            JPanel plateau = new JPanel();
+
+            BufferedImage img = null;
+            try {
+                img = ImageIO.read(new File("images/plateau.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Image dimg = img.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(dimg);
+            JLabel plateau = new JLabel(icon);
             plateau.setLayout( null );
             plateau.setBounds(368, 0, 496,  496);
             plateau.setBorder(BorderFactory.createLineBorder(Color.black));
