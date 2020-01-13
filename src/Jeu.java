@@ -98,7 +98,7 @@ public class Jeu {
                 boolean error = false;
                 while (!error) {
                     try {
-                        System.out.println("\n1. Ajouter au programme\n2. Executer le programme\n3. Placer un obstacle\n4. Defausser une/des carte(s)");
+                        System.out.println("\n1. Ajouter au programme\n2. Executer le programme\n3. Placer un obstacle\n4. Defausser une/des carte(s)\n5. Passer son tour");
                         Scanner scanner = new Scanner(System.in);
                         int choix = scanner.nextInt();
                         switch (choix) {
@@ -119,6 +119,10 @@ public class Jeu {
                             }
                             case 4: {
                                 defausser(j);
+                                error = true;
+                                break;
+                            }
+                            case 5: {
                                 error = true;
                                 break;
                             }
@@ -179,8 +183,6 @@ public class Jeu {
                     System.out.println("\nColonne?");
                     int y = scanner.nextInt();
 
-                    System.out.println(Plateau.getTuile(x, y).nom);
-
                     if (Plateau.getTuile(x, y).nom == "vide") {
                         j.piocheObstacle.remove(obstacle);
                         Plateau.ajoutTuile(obstacle, x, y);
@@ -196,7 +198,7 @@ public class Jeu {
                 System.out.println("\nVeuillez réessayer.");
             }
         }
-
+        defausserPlus(j);
     }
 
     private static Obstacle containsObstacle(ArrayList<Obstacle> pioche, String type) {
@@ -255,29 +257,12 @@ public class Jeu {
                 System.out.println("\nVeuillez réessayer.");
             }
         }
-
-        if (j.main.size() > 0) {
-            boolean errordefausse = false;
-            while (!errordefausse) {
-                try {
-                    System.out.println("\nVoulez-vous defausser des cartes??");
-                    String ajout = scanner.next();
-                    if (ajout.equals("Oui")) {
-                        defausser(j);
-                        errordefausse = true;
-                    } else if (ajout.equals("Non")) {
-                        errordefausse = true;
-                    } else {
-                        throw new Exception();
-                    }
-                } catch (Exception e) {
-                    System.out.println("\nVeuillez réessayer.");
-                }
-            }
-        }
+        defausserPlus(j);
     }
 
     private static void executerProgramme(Joueur j) {
+        Scanner scanner = new Scanner(System.in);
+
         if (j.instructions.size() == 0) {
             System.out.println("\nProgramme exécuté.");
         } else {
@@ -293,6 +278,7 @@ public class Jeu {
             }
             System.out.println("\nProgramme exécuté.");
         }
+        defausserPlus(j);
     }
 
     private static void defausser(Joueur j) {
@@ -339,6 +325,30 @@ public class Jeu {
                 }
             } catch (Exception e) {
                 System.out.println("\nVeuillez réessayer.");
+            }
+        }
+    }
+
+    private static void defausserPlus(Joueur j){
+        Scanner scanner = new Scanner(System.in);
+
+        if (j.main.size() > 0) {
+            boolean errordefausse = false;
+            while (!errordefausse) {
+                try {
+                    System.out.println("\nVoulez-vous defausser des cartes?");
+                    String ajout = scanner.next();
+                    if (ajout.equals("Oui")) {
+                        defausser(j);
+                        errordefausse = true;
+                    } else if (ajout.equals("Non")) {
+                        errordefausse = true;
+                    } else {
+                        throw new Exception();
+                    }
+                } catch (Exception e) {
+                    System.out.println("\nVeuillez réessayer.");
+                }
             }
         }
     }

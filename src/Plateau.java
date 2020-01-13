@@ -27,7 +27,6 @@ public class Plateau {
         int[] position = new int[2];
 
         for (int i = 0; i < 8; i++) {
-            System.out.print("\n");
             for (int j = 0; j < 8; j++) {
                 if (plateau[i][j]==tuile){
                     position[0] = i;

@@ -14,7 +14,6 @@ public class Joueur {
     ArrayDeque<Carte> instructions;
     ArrayList<Carte> defausse;
 
-
     public Joueur(String n, Tortue t){
         nom = n;
         tortue = t;
