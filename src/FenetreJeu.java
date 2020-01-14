@@ -189,6 +189,16 @@ public class FenetreJeu extends JFrame {
         JButton btnPasser = new JButton("Passer");
         btnPasser.setBounds(85, 351, 150, 64);
 
+        JPanel joueur = new JPanel();
+        joueur.setLayout(null);
+        joueur.setBounds(0,80, 250,100);
+        joueur.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.add(joueur);
+
+        JLabel nomJoueur = new JLabel();
+        nomJoueur.setBounds(0,0,250,100);
+        joueur.add(nomJoueur);
+
         actions.add(btnPlacer);
         actions.add(btnAjouter);
         actions.add(btnExecuter);
