@@ -25,8 +25,21 @@ public class FenetreJeu extends JFrame {
         hand = new JPanel();
         hand.setLayout(null);
         hand.setBounds(368, 553, 500, 130);
-        hand.setBorder(BorderFactory.createLineBorder(Color.black));
+        //hand.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(hand);
+
+        JPanel bandeauHand = new JPanel();
+        bandeauHand.setLayout(null);
+        bandeauHand.setBounds(378,533,490,20);
+        //bandeauHand.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.add(bandeauHand);
+
+       for (int i = 0; i < 5; i++) {
+            JLabel numeroHand= new JLabel(Integer.toString(i));
+            numeroHand.setBounds(i*98, 0,88,20);
+            numeroHand.setHorizontalAlignment(JLabel.CENTER);
+            bandeauHand.add(numeroHand);
+        }
 
         //debut des panels contenus dans hand
         /*carte1 = new JLabel();
@@ -66,17 +79,17 @@ public class FenetreJeu extends JFrame {
         ImageIcon icon = new ImageIcon(dimg);
         plateau = new JLabel(icon);
         plateau.setLayout(null);
-        plateau.setBounds(368, 43, 496, 496);
+        plateau.setBounds(368, 23, 496, 496);
         this.add(plateau);
 
         JPanel bandeauN = new JPanel();
         bandeauN.setLayout(null);
-        bandeauN.setBounds(368, 23, 496,20);
+        bandeauN.setBounds(368, 3, 496,20);
         this.add(bandeauN);
 
         JPanel bandeauW = new JPanel();
         bandeauW.setLayout(null);
-        bandeauW.setBounds(348, 43, 476,496);
+        bandeauW.setBounds(348, 23, 476,496);
         this.add(bandeauW);
 
         for (int i = 0; i < 8; i++) {
