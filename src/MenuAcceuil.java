@@ -60,6 +60,18 @@ import java.awt.event.ActionListener;
                     pageNbrJ.setVisible(true);
                 }
             });
+
+            btn2joueurs.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    pageNbrJ.setVisible(false);
+                    FenetreJeu myWindow = new FenetreJeu();
+                    myWindow.setVisible(true);
+
+                    Jeu.fenetre = myWindow;
+                    Jeu.nouvellePartie(2);
+                }
+            });
         }
 
         public static void main(String[] args) throws Exception{

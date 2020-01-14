@@ -7,6 +7,9 @@ import java.util.concurrent.SynchronousQueue;
 public class Jeu {
     public static ArrayList<Joueur> listeJoueurs;
     public static Joueur joueurActuel;
+    public static int joueurCompteur = 0;
+
+    public static FenetreJeu fenetre;
 
     public static void nouvellePartie(int nombreJoueurs) {
         switch (nombreJoueurs) {
@@ -17,24 +20,31 @@ public class Jeu {
                 Tortue rouge = new Tortue("rouge", 0, 1);
                 Tortue bleu = new Tortue("bleu", 0, 5);
 
-                Joyau joyau = new Joyau(7, 3);
+                Joyau joyau1 = new Joyau(1,7, 3);
 
                 listeJoueurs = new ArrayList<>();
 
                 Scanner scanner = new Scanner(System.in);
 
-                System.out.println("\nSaisissez le nom du Joueur 1 :");
-                String j1 = scanner.next();
+                //System.out.println("\nSaisissez le nom du Joueur 1 :");
+                //String j1 = scanner.next();
+
+                String j1 = "Joueur 1";
                 Joueur joueur1 = new Joueur(j1, rouge);
 
-                System.out.println("\nSaisissez le nom du Joueur 2 :");
-                String j2 = scanner.next();
+                //System.out.println("\nSaisissez le nom du Joueur 2 :");
+                //String j2 = scanner.next();
+
+                String j2 = "Joueur 2";
                 Joueur joueur2 = new Joueur(j2, bleu);
                 listeJoueurs.add(joueur1);
                 listeJoueurs.add(joueur2);
 
+                fenetre.updatePlateau(Plateau.plateau);
 
-                tourJoueur();
+                System.out.println(listeJoueurs.get(joueurCompteur).nom);
+
+                tourJoueur(listeJoueurs.get(0));
                 break;
             }
             case 3: {
@@ -45,9 +55,9 @@ public class Jeu {
                 Tortue bleu = new Tortue("bleu", 0, 3);
                 Tortue violet = new Tortue("violet", 0, 6);
 
-                Joyau joyau1 = new Joyau(7, 0);
-                Joyau joyau2 = new Joyau(7, 3);
-                Joyau joyau3 = new Joyau(7, 6);
+                Joyau joyau1 = new Joyau(1,7, 0);
+                Joyau joyau2 = new Joyau(2,7, 3);
+                Joyau joyau3 = new Joyau(3,7, 6);
 
                 listeJoueurs = new ArrayList<>();
 
@@ -62,8 +72,8 @@ public class Jeu {
                 Tortue violet = new Tortue("violet", 0, 5);
                 Tortue vert = new Tortue("vert", 0, 7);
 
-                Joyau joyau1 = new Joyau(7, 1);
-                Joyau joyau2 = new Joyau(7, 6);
+                Joyau joyau1 = new Joyau(1,7, 1);
+                Joyau joyau2 = new Joyau(2,7, 6);
 
                 listeJoueurs = new ArrayList<>();
 
@@ -73,9 +83,37 @@ public class Jeu {
         }
     }
 
-    public static void tourJoueur() {
-        while (listeJoueurs.size() > 1) {
-            for (Joueur j : listeJoueurs) {
+    public static void nextJoueur(){
+        if (joueurCompteur == 1){
+            joueurCompteur = 0;
+        }
+        else{
+            joueurCompteur++;
+        }
+        System.out.println(listeJoueurs.get(joueurCompteur).nom);
+        tourJoueur(listeJoueurs.get(joueurCompteur));
+    }
+
+    public static void tourJoueur(Joueur j) {
+        joueurActuel = j;
+
+        fenetre.updatePlateau(Plateau.plateau);
+
+        System.out.println("\nTour de " + j.nom);
+
+        countListeObstacle(j);
+        j.completerMain();
+
+        for (Carte c : j.main){
+            System.out.println(c.type);
+        }
+
+        fenetre.updateMain(j);
+
+
+
+        /*while (listeJoueurs.size() > 1) {
+            for (Joueur h : listeJoueurs) {
                 joueurActuel = j;
 
                 Plateau.affichage();
@@ -135,8 +173,7 @@ public class Jeu {
                     }
                 }
             }
-        }
-        System.out.println(listeJoueurs.get(0).nom + " a perdu!");
+        }*/
     }
 
     private static void countListeObstacle(Joueur j) {

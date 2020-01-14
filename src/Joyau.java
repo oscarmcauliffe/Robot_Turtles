@@ -1,6 +1,9 @@
 public class Joyau extends Tuile{
-    public Joyau(int x, int y){
+    int nbr;
+
+    public Joyau(int i, int x, int y){
         nom = "joyau";
+        nbr=i;
         Plateau.ajoutTuile(this, x, y);
     }
 }
