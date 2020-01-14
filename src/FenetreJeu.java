@@ -12,24 +12,19 @@ public class FenetreJeu extends JFrame {
     public static Joueur joueurActuel;
     public JLabel plateau;
     public JPanel hand;
-    public JLabel carte1;
-    public JLabel carte2;
-    public JLabel carte3;
-    public JLabel carte4;
-    public JLabel carte5;
 
     public FenetreJeu() {
 
         super("Robot Turtles");       // initialise le titre de le fenetre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //arrete le programme lorsque toutes les fenetres sont fermées
-        this.setSize(1300, 681);
+        this.setSize(1300, 725);
         //this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);       //permet de gerer la taille de la fenetre
         this.setLocationRelativeTo(null);         //place la fenetre par rapport a une autre fenetre, la valeur nulle correspond au bureau
         this.getContentPane().setLayout(null);
 
         hand = new JPanel();
         hand.setLayout(null);
-        hand.setBounds(368, 510, 500, 130);
+        hand.setBounds(368, 553, 500, 130);
         hand.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(hand);
 
@@ -71,69 +66,91 @@ public class FenetreJeu extends JFrame {
         ImageIcon icon = new ImageIcon(dimg);
         plateau = new JLabel(icon);
         plateau.setLayout(null);
-        plateau.setBounds(368, 0, 496, 496);
-        plateau.setBorder(BorderFactory.createLineBorder(Color.black));
+        plateau.setBounds(368, 43, 496, 496);
         this.add(plateau);
 
+        JPanel bandeauN = new JPanel();
+        bandeauN.setLayout(null);
+        bandeauN.setBounds(368, 23, 496,20);
+        this.add(bandeauN);
+
+        JPanel bandeauW = new JPanel();
+        bandeauW.setLayout(null);
+        bandeauW.setBounds(348, 43, 476,496);
+        this.add(bandeauW);
+
+        for (int i = 0; i < 8; i++) {
+            JLabel numeroN = new JLabel(Integer.toString(i));
+            numeroN.setBounds(i*62, 0,62,20);
+            numeroN.setHorizontalAlignment(JLabel.CENTER);
+            bandeauN.add(numeroN);
+        }
+
+        for (int i = 0; i < 8; i++) {
+            JLabel numeroW = new JLabel(Integer.toString(i));
+            numeroW.setBounds(0, i*62,20,62);
+            numeroW.setVerticalAlignment(JLabel.CENTER);
+            bandeauW.add(numeroW);
+        }
 
         JPanel items = new JPanel();
         items.setLayout(null);
-        items.setBounds(932, 0, 338, 640);
+        items.setBounds(932, 43, 338, 640);
         items.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(items);
 
         JPanel pileProgramme = new JPanel();
         pileProgramme.setLayout(null);
-        pileProgramme.setBounds(25, 470, 100, 150);
+        pileProgramme.setBounds(25, 513, 100, 150);
         pileProgramme.setBackground(Color.BLACK);
         //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
         items.add(pileProgramme);
 
         JPanel compteurProgramme = new JPanel();
         compteurProgramme.setLayout(null);
-        compteurProgramme.setBounds(140, 530, 50, 30);
+        compteurProgramme.setBounds(140, 573, 50, 30);
         compteurProgramme.setBackground(Color.BLACK);
         //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
         items.add(compteurProgramme);
 
         JPanel pilePierre = new JPanel();
         pilePierre.setLayout(null);
-        pilePierre.setBounds(25, 40, 100, 50);
+        pilePierre.setBounds(25, 83, 100, 50);
         pilePierre.setBackground(Color.BLACK);
         //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
         items.add(pilePierre);
 
         JPanel compteurPierre = new JPanel();
         compteurPierre.setLayout(null);
-        compteurPierre.setBounds(140, 50, 50, 30);
+        compteurPierre.setBounds(140, 93, 50, 30);
         compteurPierre.setBackground(Color.BLACK);
         //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
         items.add(compteurPierre);
 
         JPanel pileGlace = new JPanel();
         pileGlace.setLayout(null);
-        pileGlace.setBounds(25, 130, 100, 50);
+        pileGlace.setBounds(25, 173, 100, 50);
         pileGlace.setBackground(Color.BLACK);
         //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
         items.add(pileGlace);
 
         JPanel compteurGlace = new JPanel();
         compteurGlace.setLayout(null);
-        compteurGlace.setBounds(140, 140, 50, 30);
+        compteurGlace.setBounds(140, 183, 50, 30);
         compteurGlace.setBackground(Color.BLACK);
         //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
         items.add(compteurGlace);
 
         JPanel pileCaisse = new JPanel();
         pileCaisse.setLayout(null);
-        pileCaisse.setBounds(25, 220, 100, 50);
+        pileCaisse.setBounds(25, 263, 100, 50);
         pileCaisse.setBackground(Color.BLACK);
         //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
         items.add(pileCaisse);
 
         JPanel compteurCaisse = new JPanel();
         compteurCaisse.setLayout(null);
-        compteurCaisse.setBounds(140, 230, 50, 30);
+        compteurCaisse.setBounds(140, 273, 50, 30);
         compteurCaisse.setBackground(Color.BLACK);
         //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
         items.add(compteurCaisse);
@@ -141,7 +158,7 @@ public class FenetreJeu extends JFrame {
 
         JPanel actions = new JPanel();
         actions.setLayout(null);
-        actions.setBounds(0, 220, 320, 420);
+        actions.setBounds(0, 263, 320, 420);
         actions.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(actions);
 

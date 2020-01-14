@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
             super("Robot Turtles");       // initialise le titre de le fenetre
             this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);         //arrete le programme lorsque toutes les fenetres sont fermées
             this.setSize(600, 400);         //permet de gerer la taille de la fenetre
-            this.setLocationRelativeTo(null);         //place la fenetre par rapport a une autre fenetre, la valeur nulle correpsond au bureau
+            this.setLocationRelativeTo(null);         //place la fenetre par rapport a une autre fenetre, la valeur nulle correspond au bureau
             this.getContentPane().setLayout(null);
 
             JPanel pageAcceuil = new JPanel() ;     // permet d'acceder a la zone principal de la fenetre
@@ -40,10 +40,8 @@ import java.awt.event.ActionListener;
             btn4joueurs.setBounds(250,250,100,50);
 
 
-            ImageIcon iconTitre = new ImageIcon("images/RoboTurtleTitre.jpg");
-            JLabel Title = new JLabel();
-            Title.setIcon(iconTitre);
-            Title.setBounds(20,32,320,118);
+
+
 
             //contentPane.add( Title );
             pageAcceuil.add(btnJouer);

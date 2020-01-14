@@ -1,8 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class FenetrePanel extends JFrame{
-    public void fenetrePanel(){
+public class FenetreLabel extends JFrame{
+    public void fenetreLabel(){
 
         // debut panel lié au plateau de jeux
     //tortue rouge orientation
