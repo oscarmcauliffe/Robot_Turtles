@@ -31,7 +31,6 @@ public class FenetreJeu extends JFrame {
         JPanel bandeauHand = new JPanel();
         bandeauHand.setLayout(null);
         bandeauHand.setBounds(378,533,480,20);
-        //bandeauHand.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(bandeauHand);
 
        for (int i = 0; i < 5; i++) {
