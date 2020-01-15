@@ -15,6 +15,7 @@ public class FenetreJeu extends JFrame {
     public JLabel plateau;
     public JPanel hand;
     public JPanel joueur;
+    public static JButton btnPlacer;
 
     public FenetreJeu() {
 
@@ -149,7 +150,7 @@ public class FenetreJeu extends JFrame {
         actions.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(actions);
 
-        JButton btnPlacer = new JButton("Placer");
+        btnPlacer = new JButton("Placer");
         btnPlacer.setBounds(85, 15, 150, 64);
 
         JButton btnAjouter = new JButton("Ajouter");
@@ -180,7 +181,8 @@ public class FenetreJeu extends JFrame {
         btnPlacer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FenetreObstacle myWindow = new FenetreObstacle();  //creation de le fenetre
+                btnPlacer.setEnabled(false);
+                FenetreObstacle myWindow = new FenetreObstacle();
                 myWindow.setVisible(true);
             }
         });

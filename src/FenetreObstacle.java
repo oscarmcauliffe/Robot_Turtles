@@ -1,5 +1,7 @@
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class FenetreObstacle extends JFrame {
     public FenetreObstacle(){
@@ -21,6 +23,14 @@ public class FenetreObstacle extends JFrame {
         JButton btn = new JButton("Placer");
         btn.setBounds(20, 90, 420, 40);
         this.add(btn);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                FenetreJeu.btnPlacer.setEnabled(true);
+            }
+
+        });
     }
 
     public static void main(String[] args) throws Exception {
