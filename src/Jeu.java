@@ -40,10 +40,6 @@ public class Jeu {
                 listeJoueurs.add(joueur1);
                 listeJoueurs.add(joueur2);
 
-                fenetre.updatePlateau(Plateau.plateau);
-
-                System.out.println(listeJoueurs.get(joueurCompteur).nom);
-
                 tourJoueur(listeJoueurs.get(0));
                 break;
             }
@@ -96,8 +92,7 @@ public class Jeu {
 
     public static void tourJoueur(Joueur j) {
         joueurActuel = j;
-
-        fenetre.updatePlateau(Plateau.plateau);
+        FenetreJeu.joueurActuel = j;
 
         System.out.println("\nTour de " + j.nom);
 
@@ -108,8 +103,7 @@ public class Jeu {
             System.out.println(c.type);
         }
 
-        fenetre.updateMain(j);
-
+        fenetre.updateFenetre();
 
 
         /*while (listeJoueurs.size() > 1) {

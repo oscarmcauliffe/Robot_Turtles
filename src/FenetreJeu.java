@@ -2,6 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.io.File;
@@ -12,6 +14,7 @@ public class FenetreJeu extends JFrame {
     public static Joueur joueurActuel;
     public JLabel plateau;
     public JPanel hand;
+    public JPanel joueur;
 
     public FenetreJeu() {
 
@@ -39,34 +42,6 @@ public class FenetreJeu extends JFrame {
             numeroHand.setHorizontalAlignment(JLabel.CENTER);
             bandeauHand.add(numeroHand);
         }
-
-        //debut des panels contenus dans hand
-        /*carte1 = new JLabel();
-        carte1.setLayout(null);
-        carte1.setBounds(10, 5, 88, 125);
-        hand.add(carte1);
-
-        carte2 = new JLabel();
-        carte2.setLayout(null);
-        carte2.setBounds(108, 5, 88, 125);
-        hand.add(carte2);
-
-        carte3 = new JLabel();
-        carte3.setLayout(null);
-        carte3.setBounds(206, 5, 88, 125);
-        hand.add(carte3);
-
-        carte4 = new JLabel();
-        carte4.setLayout(null);
-        carte4.setBounds(304, 5, 88, 125);
-        hand.add(carte4);
-
-        carte5 = new JLabel();
-        carte5.setLayout(null);
-        carte5.setBounds(402, 5, 88, 125);
-        hand.add(carte5);
-        //fin des panels contenus dans hand*/
-
 
         BufferedImage img = null;
         try {
@@ -189,21 +164,26 @@ public class FenetreJeu extends JFrame {
         JButton btnPasser = new JButton("Passer");
         btnPasser.setBounds(85, 351, 150, 64);
 
-        JPanel joueur = new JPanel();
+        joueur = new JPanel();
         joueur.setLayout(null);
         joueur.setBounds(0,80, 250,100);
         joueur.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(joueur);
 
-        JLabel nomJoueur = new JLabel();
-        nomJoueur.setBounds(0,0,250,100);
-        joueur.add(nomJoueur);
 
         actions.add(btnPlacer);
         actions.add(btnAjouter);
         actions.add(btnExecuter);
         actions.add(btnDefausser);
         actions.add(btnPasser);
+
+        btnPlacer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FenetreObstacle myWindow = new FenetreObstacle();  //creation de le fenetre
+                myWindow.setVisible(true);
+            }
+        });
     }
 
     public static void main(String[] args) throws Exception {
@@ -212,6 +192,21 @@ public class FenetreJeu extends JFrame {
         // Create my windows
         FenetreJeu myWindow = new FenetreJeu();  //creation de le fenetre
         myWindow.setVisible(true);
+    }
+
+    public void updateFenetre(){
+        updatePlateau(Plateau.plateau);
+        updateMain();
+        updateJoueur();
+    }
+
+    public void updateJoueur(){
+        joueur.removeAll();
+
+        JLabel nomJoueur = new JLabel("Tour du " + joueurActuel.nom);
+        nomJoueur.setLayout(null);
+        nomJoueur.setBounds(0,0,250,100);
+        joueur.add(nomJoueur);
     }
 
     public void updatePlateau(Tuile[][] p){
@@ -387,8 +382,10 @@ public class FenetreJeu extends JFrame {
         }
     }
 
-    public void updateMain(Joueur j){
+    public void updateMain(){
         hand.removeAll();
+
+        Joueur j = joueurActuel;
 
         for (int i = 0; i <j.main.size(); i++){
             switch (j.main.get(i).type){

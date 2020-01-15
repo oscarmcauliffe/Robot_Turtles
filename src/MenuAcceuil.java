@@ -62,7 +62,7 @@ import java.awt.event.ActionListener;
             btn2joueurs.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    pageNbrJ.setVisible(false);
+                    dispose();
                     FenetreJeu myWindow = new FenetreJeu();
                     myWindow.setVisible(true);
 
