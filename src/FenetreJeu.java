@@ -15,7 +15,11 @@ public class FenetreJeu extends JFrame {
     public static JLabel plateauImg;
     public static JPanel hand;
     public static JPanel joueur;
+    public static JPanel items;
     public static JButton btnPlacer;
+    public static JLabel compteurPierre = new JLabel("");
+    public static JLabel compteurGlace = new JLabel("");
+    public static JLabel compteurCaisse = new JLabel("");
 
     public FenetreJeu() {
 
@@ -81,7 +85,7 @@ public class FenetreJeu extends JFrame {
             bandeauW.add(numeroW);
         }
 
-        JPanel items = new JPanel();
+        items = new JPanel();
         items.setLayout(null);
         items.setBounds(932, 43, 338, 640);
         items.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -98,51 +102,7 @@ public class FenetreJeu extends JFrame {
         compteurProgramme.setLayout(null);
         compteurProgramme.setBounds(140, 573, 50, 30);
         compteurProgramme.setBackground(Color.BLACK);
-        //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
         items.add(compteurProgramme);
-
-        JPanel pilePierre = new JPanel();
-        pilePierre.setLayout(null);
-        pilePierre.setBounds(25, 83, 100, 50);
-        pilePierre.setBackground(Color.BLACK);
-        //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-        items.add(pilePierre);
-
-        JPanel compteurPierre = new JPanel();
-        compteurPierre.setLayout(null);
-        compteurPierre.setBounds(140, 93, 50, 30);
-        compteurPierre.setBackground(Color.BLACK);
-        //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-        items.add(compteurPierre);
-
-        JPanel pileGlace = new JPanel();
-        pileGlace.setLayout(null);
-        pileGlace.setBounds(25, 173, 100, 50);
-        pileGlace.setBackground(Color.BLACK);
-        //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-        items.add(pileGlace);
-
-        JPanel compteurGlace = new JPanel();
-        compteurGlace.setLayout(null);
-        compteurGlace.setBounds(140, 183, 50, 30);
-        compteurGlace.setBackground(Color.BLACK);
-        //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-        items.add(compteurGlace);
-
-        JPanel pileCaisse = new JPanel();
-        pileCaisse.setLayout(null);
-        pileCaisse.setBounds(25, 263, 100, 50);
-        pileCaisse.setBackground(Color.BLACK);
-        //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-        items.add(pileCaisse);
-
-        JPanel compteurCaisse = new JPanel();
-        compteurCaisse.setLayout(null);
-        compteurCaisse.setBounds(140, 273, 50, 30);
-        compteurCaisse.setBackground(Color.BLACK);
-        //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-        items.add(compteurCaisse);
-
 
         JPanel actions = new JPanel();
         actions.setLayout(null);
@@ -200,10 +160,13 @@ public class FenetreJeu extends JFrame {
         updatePlateau(Plateau.plateau);
         updateMain();
         updateJoueur();
+        updateItems();
     }
 
     public static void updateJoueur() {
         joueur.removeAll();
+        joueur.setVisible(false);
+        joueur.setVisible(true);
 
         JLabel nomJoueur = new JLabel("Tour du " + joueurActuel.nom);
         nomJoueur.setLayout(null);
@@ -388,6 +351,8 @@ public class FenetreJeu extends JFrame {
 
     public static void updateMain() {
         hand.removeAll();
+        hand.setVisible(false);
+        hand.setVisible(true);
 
         Joueur j = joueurActuel;
 
@@ -559,6 +524,64 @@ public class FenetreJeu extends JFrame {
                 }
             }
         }
+    }
+
+    public static void updateItems(){
+        items.removeAll();
+        items.setVisible(false);
+        items.setVisible(true);
+
+        Jeu.countListeObstacle(joueurActuel);
+
+        BufferedImage imgPierre = null;
+        try {
+            imgPierre = ImageIO.read(new File("images/obstacles/pierre.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image dimgPierre = imgPierre.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon iconPierre = new ImageIcon(dimgPierre);
+        JLabel pilePierre = new JLabel(iconPierre);
+        pilePierre.setLayout(null);
+        pilePierre.setBounds(10, 10, 100, 100);
+        items.add(pilePierre);
+
+        compteurPierre.setLayout(null);
+        compteurPierre.setBounds(120, 40, 40, 40);
+        items.add(compteurPierre);
+
+        BufferedImage imgGlace = null;
+        try {
+            imgGlace = ImageIO.read(new File("images/obstacles/glace.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image dimgGlace = imgGlace.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon iconGlace = new ImageIcon(dimgGlace);
+        JLabel pileGlace = new JLabel(iconGlace);
+        pileGlace.setLayout(null);
+        pileGlace.setBounds(10, 120, 100, 100);
+        items.add(pileGlace);
+
+        compteurGlace.setLayout(null);
+        compteurGlace.setBounds(120, 150, 40, 40);
+        items.add(compteurGlace);
+
+        BufferedImage imgCaisse = null;
+        try {
+            imgCaisse = ImageIO.read(new File("images/obstacles/caisse.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image dimgCaisse = imgCaisse.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon iconCaisse = new ImageIcon(dimgCaisse);
+        JLabel pileCaisse = new JLabel(iconCaisse);
+        pileCaisse.setBounds(10, 230, 100, 100);
+        items.add(pileCaisse);
+
+        compteurCaisse.setLayout(null);
+        compteurCaisse.setBounds(120, 260, 40, 40);
+        items.add(compteurCaisse);
     }
 }
 

@@ -166,7 +166,7 @@ public class Jeu {
         }*/
     }
 
-    private static void countListeObstacle(Joueur j) {
+    public static void countListeObstacle(Joueur j) {
         int p = 0;
         int g = 0;
         int c = 0;
@@ -186,9 +186,9 @@ public class Jeu {
                 }
             }
         }
-        System.out.println("\nPierre : " + p);
-        System.out.println("Glace : " + g);
-        System.out.println("Caisse : " + c);
+        FenetreJeu.compteurPierre.setText("x" + p);
+        FenetreJeu.compteurGlace.setText("x" + g);
+        FenetreJeu.compteurCaisse.setText("x" + c);
     }
 
 
