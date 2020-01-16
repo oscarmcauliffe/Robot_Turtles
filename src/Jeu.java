@@ -99,10 +99,6 @@ public class Jeu {
         countListeObstacle(j);
         j.completerMain();
 
-        for (Carte c : j.main){
-            System.out.println(c.type);
-        }
-
         fenetre.updateFenetre();
 
 
@@ -195,51 +191,7 @@ public class Jeu {
         System.out.println("Caisse : " + c);
     }
 
-    private static void placerObstacle(Joueur j) {
-        boolean error = false;
-        while (!error) {
-            try {
-                System.out.println("\nQuel type d'obstacle? (pierre/glace/caisse)");
-                Scanner scanner = new Scanner(System.in);
-                String choix = scanner.next();
 
-                Obstacle obstacle = containsObstacle(j.piocheObstacle, choix);
-
-                if (obstacle == null) {
-                    System.out.println("\nAucun obstacle de ce type disponible.");
-                    throw new Exception();
-                } else if (obstacle.nom.equals("pierre") || obstacle.nom.equals("glace") || obstacle.nom.equals("caisse")) {
-                    System.out.println("\nOù le placer?\nLigne?");
-                    int x = scanner.nextInt();
-                    System.out.println("\nColonne?");
-                    int y = scanner.nextInt();
-
-                    if (Plateau.getTuile(x, y).nom == "vide") {
-                        j.piocheObstacle.remove(obstacle);
-                        Plateau.ajoutTuile(obstacle, x, y);
-                        error = true;
-                    } else {
-                        System.out.println("\nCase occupée!");
-                        throw new Exception();
-                    }
-                } else {
-                    throw new Exception();
-                }
-            } catch (Exception e) {
-                System.out.println("\nVeuillez réessayer.");
-            }
-        }
-        defausserPlus(j);
-    }
-
-    private static Obstacle containsObstacle(ArrayList<Obstacle> pioche, String type) {
-        for (Obstacle o : pioche) {
-            if (o.nom.equals(type)) {
-                return o;
-            }
-        }
-        return null;
-    }
 
     private static void ajouterProgramme(Joueur j) {
         Scanner scanner = new Scanner(System.in);

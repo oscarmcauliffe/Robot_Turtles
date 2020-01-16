@@ -12,15 +12,15 @@ import java.io.IOException;
 public class FenetreJeu extends JFrame {
 
     public static Joueur joueurActuel;
-    public JLabel plateau;
-    public JPanel hand;
-    public JPanel joueur;
+    public static JLabel plateauImg;
+    public static JPanel hand;
+    public static JPanel joueur;
     public static JButton btnPlacer;
 
     public FenetreJeu() {
 
         super("Robot Turtles");       // initialise le titre de le fenetre
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //arrete le programme lorsque toutes les fenetres sont fermées
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //arrete le programme lorsque toutes les fenetres sont fermées
         this.setSize(1300, 725);
         //this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);       //permet de gerer la taille de la fenetre
         this.setLocationRelativeTo(null);         //place la fenetre par rapport a une autre fenetre, la valeur nulle correspond au bureau
@@ -34,12 +34,12 @@ public class FenetreJeu extends JFrame {
 
         JPanel bandeauHand = new JPanel();
         bandeauHand.setLayout(null);
-        bandeauHand.setBounds(378,533,480,20);
+        bandeauHand.setBounds(378, 533, 480, 20);
         this.add(bandeauHand);
 
-       for (int i = 0; i < 5; i++) {
-            JLabel numeroHand= new JLabel(Integer.toString(i));
-            numeroHand.setBounds(i*98, 0,88,20);
+        for (int i = 0; i < 5; i++) {
+            JLabel numeroHand = new JLabel(Integer.toString(i));
+            numeroHand.setBounds(i * 98, 0, 88, 20);
             numeroHand.setHorizontalAlignment(JLabel.CENTER);
             bandeauHand.add(numeroHand);
         }
@@ -52,31 +52,31 @@ public class FenetreJeu extends JFrame {
         }
         Image dimg = img.getScaledInstance(496, 496, Image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(dimg);
-        plateau = new JLabel(icon);
-        plateau.setLayout(null);
-        plateau.setBounds(368, 23, 496, 496);
-        this.add(plateau);
+        plateauImg = new JLabel(icon);
+        plateauImg.setLayout(null);
+        plateauImg.setBounds(368, 23, 496, 496);
+        this.add(plateauImg);
 
         JPanel bandeauN = new JPanel();
         bandeauN.setLayout(null);
-        bandeauN.setBounds(368, 3, 496,20);
+        bandeauN.setBounds(368, 3, 496, 20);
         this.add(bandeauN);
 
         JPanel bandeauW = new JPanel();
         bandeauW.setLayout(null);
-        bandeauW.setBounds(348, 23, 476,496);
+        bandeauW.setBounds(348, 23, 476, 496);
         this.add(bandeauW);
 
         for (int i = 0; i < 8; i++) {
             JLabel numeroN = new JLabel(Integer.toString(i));
-            numeroN.setBounds(i*62, 0,62,20);
+            numeroN.setBounds(i * 62, 0, 62, 20);
             numeroN.setHorizontalAlignment(JLabel.CENTER);
             bandeauN.add(numeroN);
         }
 
         for (int i = 0; i < 8; i++) {
             JLabel numeroW = new JLabel(Integer.toString(i));
-            numeroW.setBounds(0, i*62,20,62);
+            numeroW.setBounds(0, i * 62, 20, 62);
             numeroW.setVerticalAlignment(JLabel.CENTER);
             bandeauW.add(numeroW);
         }
@@ -167,7 +167,7 @@ public class FenetreJeu extends JFrame {
 
         joueur = new JPanel();
         joueur.setLayout(null);
-        joueur.setBounds(0,80, 250,100);
+        joueur.setBounds(0, 80, 250, 100);
         joueur.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(joueur);
 
@@ -196,29 +196,31 @@ public class FenetreJeu extends JFrame {
         myWindow.setVisible(true);
     }
 
-    public void updateFenetre(){
+    public static void updateFenetre() {
         updatePlateau(Plateau.plateau);
         updateMain();
         updateJoueur();
     }
 
-    public void updateJoueur(){
+    public static void updateJoueur() {
         joueur.removeAll();
 
         JLabel nomJoueur = new JLabel("Tour du " + joueurActuel.nom);
         nomJoueur.setLayout(null);
-        nomJoueur.setBounds(0,0,250,100);
+        nomJoueur.setBounds(0, 0, 250, 100);
         joueur.add(nomJoueur);
     }
 
-    public void updatePlateau(Tuile[][] p){
-        plateau.removeAll();
+    public static void updatePlateau(Tuile[][] p) {
+        plateauImg.removeAll();
+        plateauImg.setVisible(false);
+        plateauImg.setVisible(true);
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 Tuile t = p[i][j];
-                switch (t.nom){
-                    case "pierre":{
+                switch (t.nom) {
+                    case "pierre": {
                         BufferedImage image = null;
                         try {
                             image = ImageIO.read(new File("images/obstacles/pierre.png"));
@@ -229,11 +231,11 @@ public class FenetreJeu extends JFrame {
                         ImageIcon icone = new ImageIcon(dimage);
                         JLabel pierre = new JLabel(icone);
                         pierre.setLayout(null);
-                        pierre.setBounds(j*62, i*62, 62, 62);
-                        plateau.add(pierre);
+                        pierre.setBounds(j * 62, i * 62, 62, 62);
+                        plateauImg.add(pierre);
                         break;
                     }
-                    case "glace":{
+                    case "glace": {
                         BufferedImage image = null;
                         try {
                             image = ImageIO.read(new File("images/obstacles/glace.png"));
@@ -244,11 +246,11 @@ public class FenetreJeu extends JFrame {
                         ImageIcon icone = new ImageIcon(dimage);
                         JLabel glace = new JLabel(icone);
                         glace.setLayout(null);
-                        glace.setBounds(j*62, i*62, 62, 62);
-                        plateau.add(glace);
+                        glace.setBounds(j * 62, i * 62, 62, 62);
+                        plateauImg.add(glace);
                         break;
                     }
-                    case "caisse":{
+                    case "caisse": {
                         BufferedImage image = null;
                         try {
                             image = ImageIO.read(new File("images/obstacles/caisse.png"));
@@ -259,14 +261,14 @@ public class FenetreJeu extends JFrame {
                         ImageIcon icone = new ImageIcon(dimage);
                         JLabel caisse = new JLabel(icone);
                         caisse.setLayout(null);
-                        caisse.setBounds(j*62, i*62, 62, 62);
-                        plateau.add(caisse);
+                        caisse.setBounds(j * 62, i * 62, 62, 62);
+                        plateauImg.add(caisse);
                         break;
                     }
-                    case "joyau":{
-                        if (t instanceof Joyau){
-                            switch (((Joyau) t).nbr){
-                                case 1:{
+                    case "joyau": {
+                        if (t instanceof Joyau) {
+                            switch (((Joyau) t).nbr) {
+                                case 1: {
                                     BufferedImage image = null;
                                     try {
                                         image = ImageIO.read(new File("images/joyaux/jrouge.png"));
@@ -277,11 +279,11 @@ public class FenetreJeu extends JFrame {
                                     ImageIcon icone = new ImageIcon(dimage);
                                     JLabel joyau = new JLabel(icone);
                                     joyau.setLayout(null);
-                                    joyau.setBounds(j*62, i*62, 62, 62);
-                                    plateau.add(joyau);
+                                    joyau.setBounds(j * 62, i * 62, 62, 62);
+                                    plateauImg.add(joyau);
                                     break;
                                 }
-                                case 2:{
+                                case 2: {
                                     BufferedImage image = null;
                                     try {
                                         image = ImageIO.read(new File("images/joyaux/jvert.png"));
@@ -292,11 +294,11 @@ public class FenetreJeu extends JFrame {
                                     ImageIcon icone = new ImageIcon(dimage);
                                     JLabel joyau = new JLabel(icone);
                                     joyau.setLayout(null);
-                                    joyau.setBounds(j*62, i*62, 62, 62);
-                                    plateau.add(joyau);
+                                    joyau.setBounds(j * 62, i * 62, 62, 62);
+                                    plateauImg.add(joyau);
                                     break;
                                 }
-                                case 3:{
+                                case 3: {
                                     BufferedImage image = null;
                                     try {
                                         image = ImageIO.read(new File("images/joyaux/jbleu.png"));
@@ -307,17 +309,17 @@ public class FenetreJeu extends JFrame {
                                     ImageIcon icone = new ImageIcon(dimage);
                                     JLabel joyau = new JLabel(icone);
                                     joyau.setLayout(null);
-                                    joyau.setBounds(j*62, i*62, 62, 62);
-                                    plateau.add(joyau);
+                                    joyau.setBounds(j * 62, i * 62, 62, 62);
+                                    plateauImg.add(joyau);
                                     break;
                                 }
                             }
                         }
                     }
                     default:
-                        if (t instanceof Tortue){
-                            switch (((Tortue) t).orientation){
-                                case 1:{
+                        if (t instanceof Tortue) {
+                            switch (((Tortue) t).orientation) {
+                                case 1: {
                                     BufferedImage image = null;
                                     try {
                                         image = ImageIO.read(new File("images/tortues/" + t.nom + "N.png"));
@@ -328,11 +330,11 @@ public class FenetreJeu extends JFrame {
                                     ImageIcon icone = new ImageIcon(dimage);
                                     JLabel tortue = new JLabel(icone);
                                     tortue.setLayout(null);
-                                    tortue.setBounds(j*62, i*62, 62, 62);
-                                    plateau.add(tortue);
+                                    tortue.setBounds(j * 62, i * 62, 62, 62);
+                                    plateauImg.add(tortue);
                                     break;
                                 }
-                                case 2:{
+                                case 2: {
                                     BufferedImage image = null;
                                     try {
                                         image = ImageIO.read(new File("images/tortues/" + t.nom + "E.png"));
@@ -343,11 +345,11 @@ public class FenetreJeu extends JFrame {
                                     ImageIcon icone = new ImageIcon(dimage);
                                     JLabel tortue = new JLabel(icone);
                                     tortue.setLayout(null);
-                                    tortue.setBounds(j*62, i*62, 62, 62);
-                                    plateau.add(tortue);
+                                    tortue.setBounds(j * 62, i * 62, 62, 62);
+                                    plateauImg.add(tortue);
                                     break;
                                 }
-                                case 3:{
+                                case 3: {
                                     BufferedImage image = null;
                                     try {
                                         image = ImageIO.read(new File("images/tortues/" + t.nom + "S.png"));
@@ -358,11 +360,11 @@ public class FenetreJeu extends JFrame {
                                     ImageIcon icone = new ImageIcon(dimage);
                                     JLabel tortue = new JLabel(icone);
                                     tortue.setLayout(null);
-                                    tortue.setBounds(j*62, i*62, 62, 62);
-                                    plateau.add(tortue);
+                                    tortue.setBounds(j * 62, i * 62, 62, 62);
+                                    plateauImg.add(tortue);
                                     break;
                                 }
-                                case 4:{
+                                case 4: {
                                     BufferedImage image = null;
                                     try {
                                         image = ImageIO.read(new File("images/tortues/" + t.nom + "W.png"));
@@ -373,8 +375,8 @@ public class FenetreJeu extends JFrame {
                                     ImageIcon icone = new ImageIcon(dimage);
                                     JLabel tortue = new JLabel(icone);
                                     tortue.setLayout(null);
-                                    tortue.setBounds(j*62, i*62, 62, 62);
-                                    plateau.add(tortue);
+                                    tortue.setBounds(j * 62, i * 62, 62, 62);
+                                    plateauImg.add(tortue);
                                     break;
                                 }
                             }
@@ -384,14 +386,14 @@ public class FenetreJeu extends JFrame {
         }
     }
 
-    public void updateMain(){
+    public static void updateMain() {
         hand.removeAll();
 
         Joueur j = joueurActuel;
 
-        for (int i = 0; i <j.main.size(); i++){
-            switch (j.main.get(i).type){
-                case "bleu":{
+        for (int i = 0; i < j.main.size(); i++) {
+            switch (j.main.get(i).type) {
+                case "bleu": {
                     BufferedImage image = null;
                     try {
                         image = ImageIO.read(new File("images/cartes/carteBleu.png"));
@@ -402,28 +404,28 @@ public class FenetreJeu extends JFrame {
                     ImageIcon icone = new ImageIcon(dimage);
                     JLabel bleu = new JLabel(icone);
                     bleu.setLayout(null);
-                    switch (i){
-                        case 0:{
+                    switch (i) {
+                        case 0: {
                             bleu.setBounds(10, 5, 88, 125);
                             hand.add(bleu);
                             break;
                         }
-                        case 1:{
+                        case 1: {
                             bleu.setBounds(108, 5, 88, 125);
                             hand.add(bleu);
                             break;
                         }
-                        case 2:{
+                        case 2: {
                             bleu.setBounds(206, 5, 88, 125);
                             hand.add(bleu);
                             break;
                         }
-                        case 3:{
+                        case 3: {
                             bleu.setBounds(304, 5, 88, 125);
                             hand.add(bleu);
                             break;
                         }
-                        case 4:{
+                        case 4: {
                             bleu.setBounds(402, 5, 88, 125);
                             hand.add(bleu);
                             break;
@@ -431,7 +433,7 @@ public class FenetreJeu extends JFrame {
                     }
                     break;
                 }
-                case "jaune":{
+                case "jaune": {
                     BufferedImage image = null;
                     try {
                         image = ImageIO.read(new File("images/cartes/carteJaune.png"));
@@ -444,28 +446,28 @@ public class FenetreJeu extends JFrame {
                     jaune.setLayout(null);
                     jaune.setBounds(0, 0, 88, 125);
 
-                    switch (i){
-                        case 0:{
+                    switch (i) {
+                        case 0: {
                             jaune.setBounds(10, 5, 88, 125);
                             hand.add(jaune);
                             break;
                         }
-                        case 1:{
+                        case 1: {
                             jaune.setBounds(108, 5, 88, 125);
                             hand.add(jaune);
                             break;
                         }
-                        case 2:{
+                        case 2: {
                             jaune.setBounds(206, 5, 88, 125);
                             hand.add(jaune);
                             break;
                         }
-                        case 3:{
+                        case 3: {
                             jaune.setBounds(304, 5, 88, 125);
                             hand.add(jaune);
                             break;
                         }
-                        case 4:{
+                        case 4: {
                             jaune.setBounds(402, 5, 88, 125);
                             hand.add(jaune);
                             break;
@@ -473,7 +475,7 @@ public class FenetreJeu extends JFrame {
                     }
                     break;
                 }
-                case "violette":{
+                case "violette": {
                     BufferedImage image = null;
                     try {
                         image = ImageIO.read(new File("images/cartes/carteViolet.png"));
@@ -486,35 +488,35 @@ public class FenetreJeu extends JFrame {
                     violet.setLayout(null);
                     violet.setBounds(0, 0, 88, 125);
 
-                    switch (i){
-                        case 0:{
+                    switch (i) {
+                        case 0: {
                             violet.setBounds(10, 5, 88, 125);
                             hand.add(violet);
                             break;
                         }
-                        case 1:{
+                        case 1: {
                             violet.setBounds(108, 5, 88, 125);
                             hand.add(violet);
                             break;
                         }
-                        case 2:{
+                        case 2: {
                             violet.setBounds(206, 5, 88, 125);
                             hand.add(violet);
                             break;
                         }
-                        case 3:{
+                        case 3: {
                             violet.setBounds(304, 5, 88, 125);
                             hand.add(violet);
                             break;
                         }
-                        case 4:{
+                        case 4: {
                             violet.setBounds(402, 5, 88, 125);
                             hand.add(violet);
                             break;
                         }
                     }
                 }
-                case "laser":{
+                case "laser": {
                     BufferedImage image = null;
                     try {
                         image = ImageIO.read(new File("images/cartes/carteLaser.png"));
@@ -527,28 +529,28 @@ public class FenetreJeu extends JFrame {
                     laser.setLayout(null);
                     laser.setBounds(0, 0, 88, 125);
 
-                    switch (i){
-                        case 0:{
+                    switch (i) {
+                        case 0: {
                             laser.setBounds(10, 5, 88, 125);
                             hand.add(laser);
                             break;
                         }
-                        case 1:{
+                        case 1: {
                             laser.setBounds(108, 5, 88, 125);
                             hand.add(laser);
                             break;
                         }
-                        case 2:{
+                        case 2: {
                             laser.setBounds(206, 5, 88, 125);
                             hand.add(laser);
                             break;
                         }
-                        case 3:{
+                        case 3: {
                             laser.setBounds(304, 5, 88, 125);
                             hand.add(laser);
                             break;
                         }
-                        case 4:{
+                        case 4: {
                             laser.setBounds(402, 5, 88, 125);
                             hand.add(laser);
                             break;

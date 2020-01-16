@@ -1,35 +1,76 @@
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class FenetreObstacle extends JFrame {
+    public JComboBox<String> comboOb;
+    public JComboBox<String> comboLigne;
+    public JComboBox<String> comboColonne;
+    public JButton btnPlacer;
+    public JLabel erreur;
+    public boolean valide = false;
+
     public FenetreObstacle(){
         super("Placer Obstacle");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(470, 200);
+        this.setSize(470, 370);
         this.setLocationRelativeTo(null);
         this.getContentPane().setLayout(null);
 
-        JLabel texte= new JLabel("Sélectionnez un type de mur : ", SwingConstants.CENTER);
-        texte.setBounds(20, 0, 420, 40);
-        this.add(texte);
+        JLabel type= new JLabel("Sélectionnez un type de mur : ", SwingConstants.CENTER);
+        type.setBounds(20, 0, 420, 40);
+        this.add(type);
 
         String[] obstacles = new String[] {"Pierre", "Glace", "Caisse"};
-        JComboBox<String> comboOb = new JComboBox<String>(obstacles);
+        comboOb = new JComboBox<String>(obstacles);
         comboOb.setBounds(20, 40, 420, 40);
         this.add(comboOb);
 
-        JButton btn = new JButton("Placer");
-        btn.setBounds(20, 90, 420, 40);
-        this.add(btn);
+        JLabel coord= new JLabel("Sélectionnez une ligne et une colonne : ", SwingConstants.CENTER);
+        coord.setBounds(20, 90, 420, 40);
+        this.add(coord);
+
+        String[] ligne = new String[] {"0", "1", "2", "3", "4", "5", "6", "7"};
+        comboLigne = new JComboBox<String>(ligne);
+        comboLigne.setBounds(20, 140, 420, 40);
+        this.add(comboLigne);
+
+        String[] colonne = new String[] {"0", "1", "2", "3", "4", "5", "6", "7"};
+        comboColonne = new JComboBox<String>(colonne);
+        comboColonne.setBounds(20, 190, 420, 40);
+        this.add(comboColonne);
+
+        btnPlacer = new JButton("Placer");
+        btnPlacer.setBounds(20, 240, 420, 40);
+        this.add(btnPlacer);
+
+        erreur= new JLabel("", SwingConstants.CENTER);
+        erreur.setBounds(20, 280, 420, 40);
+        this.add(erreur);
+
 
         this.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosing(WindowEvent e) {
-                FenetreJeu.btnPlacer.setEnabled(true);
+            public void windowClosed(WindowEvent e) {
+                if (valide){
+                    FenetreJeu.btnPlacer.setEnabled(false);
+                }
+                else {
+                    FenetreJeu.btnPlacer.setEnabled(true);
+                }
+                FenetreJeu.updateFenetre();
             }
+        });
 
+        btnPlacer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                placerObstacle(FenetreJeu.joueurActuel,comboOb.getSelectedItem().toString());
+            }
         });
     }
 
@@ -37,5 +78,72 @@ public class FenetreObstacle extends JFrame {
         UIManager.setLookAndFeel(new NimbusLookAndFeel());
         FenetreObstacle myWindow = new FenetreObstacle();  //creation de le fenetre
         myWindow.setVisible(true);
+    }
+
+    private void placerObstacle(Joueur j, String choix) {
+        erreur.setText("");
+        Obstacle obstacle = containsObstacle(j.piocheObstacle, choix.toLowerCase());
+
+        if(obstacle == null){
+            erreur.setText("Cet obstacle n'est pas disponible!");
+        }
+        else{
+            int x = Integer.parseInt(comboLigne.getSelectedItem().toString());
+            int y = Integer.parseInt(comboColonne.getSelectedItem().toString());
+
+            if (Plateau.getTuile(x, y).nom == "vide") {
+                j.piocheObstacle.remove(obstacle);
+                Plateau.ajoutTuile(obstacle, x, y);
+                valide = true;
+                dispose();
+            } else {
+                erreur.setText("Cette case est occupée!");
+            }
+        }
+
+
+        /*boolean error = false;
+        while (!error) {
+            try {
+                System.out.println("\nQuel type d'obstacle? (pierre/glace/caisse)");
+                Scanner scanner = new Scanner(System.in);
+                String choix = scanner.next();
+
+                Obstacle obstacle = containsObstacle(j.piocheObstacle, choix);
+
+                if (obstacle == null) {
+                    System.out.println("\nAucun obstacle de ce type disponible.");
+                    throw new Exception();
+                } else if (obstacle.nom.equals("pierre") || obstacle.nom.equals("glace") || obstacle.nom.equals("caisse")) {
+                    System.out.println("\nOù le placer?\nLigne?");
+                    int x = scanner.nextInt();
+                    System.out.println("\nColonne?");
+                    int y = scanner.nextInt();
+
+                    if (Plateau.getTuile(x, y).nom == "vide") {
+                        j.piocheObstacle.remove(obstacle);
+                        Plateau.ajoutTuile(obstacle, x, y);
+                        error = true;
+                    } else {
+                        System.out.println("\nCase occupée!");
+                        throw new Exception();
+                    }
+                } else {
+                    throw new Exception();
+                }
+            } catch (Exception e) {
+                System.out.println("\nVeuillez réessayer.");
+            }
+        }
+        defausserPlus(j);*/
+    }
+
+    private Obstacle containsObstacle(ArrayList<Obstacle> pioche, String type) {
+        for (Obstacle o : pioche) {
+            if (o.nom.equals(type)) {
+                return o;
+            }
+        }
+        return null;
     }
 }
