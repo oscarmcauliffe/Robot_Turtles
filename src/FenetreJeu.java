@@ -17,9 +17,15 @@ public class FenetreJeu extends JFrame {
     public static JPanel joueur;
     public static JPanel items;
     public static JButton btnPlacer;
+    public static JButton btnAjouter;
+    public static JButton btnExecuter;
+    public static JButton btnDefausser;
+    public static JButton btnPasser;
+
     public static JLabel compteurPierre = new JLabel("");
     public static JLabel compteurGlace = new JLabel("");
     public static JLabel compteurCaisse = new JLabel("");
+    public static JLabel compteurProgramme = new JLabel("");
 
     public FenetreJeu() {
 
@@ -88,21 +94,7 @@ public class FenetreJeu extends JFrame {
         items = new JPanel();
         items.setLayout(null);
         items.setBounds(932, 43, 338, 640);
-        items.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(items);
-
-        JPanel pileProgramme = new JPanel();
-        pileProgramme.setLayout(null);
-        pileProgramme.setBounds(25, 513, 100, 150);
-        pileProgramme.setBackground(Color.BLACK);
-        //carte1.setBorder(BorderFactory.createLineBorder(Color.black));
-        items.add(pileProgramme);
-
-        JPanel compteurProgramme = new JPanel();
-        compteurProgramme.setLayout(null);
-        compteurProgramme.setBounds(140, 573, 50, 30);
-        compteurProgramme.setBackground(Color.BLACK);
-        items.add(compteurProgramme);
 
         JPanel actions = new JPanel();
         actions.setLayout(null);
@@ -110,20 +102,20 @@ public class FenetreJeu extends JFrame {
         actions.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(actions);
 
-        btnPlacer = new JButton("Placer");
-        btnPlacer.setBounds(85, 15, 150, 64);
+        btnPlacer = new JButton("Placer Obstacle");
+        btnPlacer.setBounds(85, 15, 200, 64);
 
-        JButton btnAjouter = new JButton("Ajouter");
-        btnAjouter.setBounds(85, 99, 150, 64);
+        btnAjouter = new JButton("Ajouter au Programme");
+        btnAjouter.setBounds(85, 99, 200, 64);
 
-        JButton btnExecuter = new JButton("Executer");
-        btnExecuter.setBounds(85, 183, 150, 64);
+        btnExecuter = new JButton("Executer le Programme");
+        btnExecuter.setBounds(85, 183, 200, 64);
 
-        JButton btnDefausser = new JButton("Defausser");
-        btnDefausser.setBounds(85, 267, 150, 64);
+        btnDefausser = new JButton("Defausser Carte");
+        btnDefausser.setBounds(85, 267, 200, 64);
 
-        JButton btnPasser = new JButton("Passer");
-        btnPasser.setBounds(85, 351, 150, 64);
+        btnPasser = new JButton("Finir Tour");
+        btnPasser.setBounds(85, 351, 200, 64);
 
         joueur = new JPanel();
         joueur.setLayout(null);
@@ -142,6 +134,9 @@ public class FenetreJeu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnPlacer.setEnabled(false);
+                FenetreJeu.btnAjouter.setEnabled(false);
+                FenetreJeu.btnExecuter.setEnabled(false);
+
                 FenetreObstacle myWindow = new FenetreObstacle();
                 myWindow.setVisible(true);
             }
@@ -168,7 +163,7 @@ public class FenetreJeu extends JFrame {
         joueur.setVisible(false);
         joueur.setVisible(true);
 
-        JLabel nomJoueur = new JLabel("Tour du " + joueurActuel.nom);
+        JLabel nomJoueur = new JLabel("Tour du " + joueurActuel.nom, SwingConstants.CENTER);
         nomJoueur.setLayout(null);
         nomJoueur.setBounds(0, 0, 250, 100);
         joueur.add(nomJoueur);
@@ -531,7 +526,7 @@ public class FenetreJeu extends JFrame {
         items.setVisible(false);
         items.setVisible(true);
 
-        Jeu.countListeObstacle(joueurActuel);
+        Jeu.countItems(joueurActuel);
 
         BufferedImage imgPierre = null;
         try {
@@ -582,6 +577,23 @@ public class FenetreJeu extends JFrame {
         compteurCaisse.setLayout(null);
         compteurCaisse.setBounds(120, 260, 40, 40);
         items.add(compteurCaisse);
+
+        BufferedImage imgCarte = null;
+        try {
+            imgCarte = ImageIO.read(new File("images/cartes/carteDos.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image dimgCarte = imgCarte.getScaledInstance(100, 137, Image.SCALE_SMOOTH);
+        ImageIcon iconCarte = new ImageIcon(dimgCarte);
+        JLabel pileProgramme = new JLabel(iconCarte);
+        pileProgramme.setBounds(10, 340, 100, 137);
+        items.add(pileProgramme);
+
+        compteurProgramme.setLayout(null);
+        compteurProgramme.setBounds(120, 390, 40, 40);
+        compteurProgramme.setBackground(Color.BLACK);
+        items.add(compteurProgramme);
     }
 }
 

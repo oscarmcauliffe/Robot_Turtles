@@ -94,9 +94,7 @@ public class Jeu {
         joueurActuel = j;
         FenetreJeu.joueurActuel = j;
 
-        System.out.println("\nTour de " + j.nom);
-
-        countListeObstacle(j);
+        countItems(j);
         j.completerMain();
 
         fenetre.updateFenetre();
@@ -166,7 +164,7 @@ public class Jeu {
         }*/
     }
 
-    public static void countListeObstacle(Joueur j) {
+    public static void countItems(Joueur j) {
         int p = 0;
         int g = 0;
         int c = 0;
@@ -189,6 +187,12 @@ public class Jeu {
         FenetreJeu.compteurPierre.setText("x" + p);
         FenetreJeu.compteurGlace.setText("x" + g);
         FenetreJeu.compteurCaisse.setText("x" + c);
+
+        int carte = 0;
+        for(Carte i : j.instructions){
+            carte++;
+        }
+        FenetreJeu.compteurProgramme.setText("x" + carte);
     }
 
 
