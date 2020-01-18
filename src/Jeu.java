@@ -24,16 +24,8 @@ public class Jeu {
 
                 listeJoueurs = new ArrayList<>();
 
-                Scanner scanner = new Scanner(System.in);
-
-                //System.out.println("\nSaisissez le nom du Joueur 1 :");
-                //String j1 = scanner.next();
-
                 String j1 = "Joueur 1";
                 Joueur joueur1 = new Joueur(j1, rouge);
-
-                //System.out.println("\nSaisissez le nom du Joueur 2 :");
-                //String j2 = scanner.next();
 
                 String j2 = "Joueur 2";
                 Joueur joueur2 = new Joueur(j2, bleu);
@@ -57,7 +49,19 @@ public class Jeu {
 
                 listeJoueurs = new ArrayList<>();
 
-                Plateau.affichage();
+                String j1 = "Joueur 1";
+                Joueur joueur1 = new Joueur(j1, rouge);
+
+                String j2 = "Joueur 2";
+                Joueur joueur2 = new Joueur(j2, bleu);
+
+                String j3 = "Joueur 3";
+                Joueur joueur3 = new Joueur(j3, violet);
+                listeJoueurs.add(joueur1);
+                listeJoueurs.add(joueur2);
+                listeJoueurs.add(joueur3);
+
+                tourJoueur(listeJoueurs.get(0));
                 break;
             }
             case 4: {
@@ -73,14 +77,30 @@ public class Jeu {
 
                 listeJoueurs = new ArrayList<>();
 
-                Plateau.affichage();
+                String j1 = "Joueur 1";
+                Joueur joueur1 = new Joueur(j1, rouge);
+
+                String j2 = "Joueur 2";
+                Joueur joueur2 = new Joueur(j2, bleu);
+
+                String j3 = "Joueur 3";
+                Joueur joueur3 = new Joueur(j3, violet);
+
+                String j4 = "Joueur 4";
+                Joueur joueur4 = new Joueur(j4, vert);
+                listeJoueurs.add(joueur1);
+                listeJoueurs.add(joueur2);
+                listeJoueurs.add(joueur3);
+                listeJoueurs.add(joueur4);
+
+                tourJoueur(listeJoueurs.get(0));
                 break;
             }
         }
     }
 
     public static void nextJoueur(){
-        if (joueurCompteur == 1){
+        if (joueurCompteur == listeJoueurs.size()-1){
             joueurCompteur = 0;
         }
         else{
