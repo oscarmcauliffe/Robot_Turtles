@@ -7,12 +7,12 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class FenetreObstacle extends JFrame {
-    public JComboBox<String> comboOb;
-    public JComboBox<String> comboLigne;
-    public JComboBox<String> comboColonne;
-    public JButton btnPlacer;
-    public JLabel erreur;
-    public boolean valide = false;
+    private JComboBox<String> comboOb;
+    private JComboBox<String> comboLigne;
+    private JComboBox<String> comboColonne;
+    private JButton btnPlacer;
+    private JLabel erreur;
+    private boolean valide = false;
 
     public FenetreObstacle(){
         super("Placer Obstacle");
@@ -76,12 +76,6 @@ public class FenetreObstacle extends JFrame {
                 placerObstacle(FenetreJeu.joueurActuel,comboOb.getSelectedItem().toString());
             }
         });
-    }
-
-    public static void main(String[] args) throws Exception {
-        UIManager.setLookAndFeel(new NimbusLookAndFeel());
-        FenetreObstacle myWindow = new FenetreObstacle();  //creation de le fenetre
-        myWindow.setVisible(true);
     }
 
     private void placerObstacle(Joueur j, String choix) {

@@ -37,6 +37,7 @@ public class Carte {
                     switch (devant.nom){
                         case "joyau":{
                             System.out.println(Jeu.joueurActuel.nom + " a gagné!");
+                            Jeu.joueurActuel.retirerTortue();
                             Jeu.listeJoueurs.remove(Jeu.joueurActuel);
                             break;
                         }
@@ -74,7 +75,8 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0],Plateau.getPosition(t)[1]+1);
                     switch (devant.nom){
                         case "joyau":{
-                            System.out.println(Jeu.joueurActuel.nom + "ca gagné!");
+                            System.out.println(Jeu.joueurActuel.nom + " a gagné!");
+                            Jeu.joueurActuel.retirerTortue();
                             Jeu.listeJoueurs.remove(Jeu.joueurActuel);
                             break;
                         }
@@ -113,6 +115,7 @@ public class Carte {
                     switch (devant.nom){
                         case "joyau":{
                             System.out.println(Jeu.joueurActuel.nom + " a gagné!");
+                            Jeu.joueurActuel.retirerTortue();
                             Jeu.listeJoueurs.remove(Jeu.joueurActuel);
                             break;
                         }
@@ -151,6 +154,7 @@ public class Carte {
                     switch (devant.nom){
                         case "joyau":{
                             System.out.println(Jeu.joueurActuel.nom + " a gagné!");
+                            Jeu.joueurActuel.retirerTortue();
                             Jeu.listeJoueurs.remove(Jeu.joueurActuel);
                             break;
                         }

@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class FenetreJeu extends JFrame {
 
@@ -20,12 +22,13 @@ public class FenetreJeu extends JFrame {
     public static JButton btnAjouter;
     public static JButton btnExecuter;
     public static JButton btnDefausser;
-    public static JButton btnPasser;
+    public static JButton btnFinir;
 
     public static JLabel compteurPierre = new JLabel("");
     public static JLabel compteurGlace = new JLabel("");
     public static JLabel compteurCaisse = new JLabel("");
     public static JLabel compteurProgramme = new JLabel("");
+    public static JLabel compteurDefausse = new JLabel("");
 
     public FenetreJeu() {
 
@@ -114,8 +117,8 @@ public class FenetreJeu extends JFrame {
         btnDefausser = new JButton("Defausser Carte");
         btnDefausser.setBounds(85, 267, 200, 64);
 
-        btnPasser = new JButton("Finir Tour");
-        btnPasser.setBounds(85, 351, 200, 64);
+        btnFinir = new JButton("Finir Tour");
+        btnFinir.setBounds(85, 351, 200, 64);
 
         joueur = new JPanel();
         joueur.setLayout(null);
@@ -128,17 +131,62 @@ public class FenetreJeu extends JFrame {
         actions.add(btnAjouter);
         actions.add(btnExecuter);
         actions.add(btnDefausser);
-        actions.add(btnPasser);
+        actions.add(btnFinir);
 
         btnPlacer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnPlacer.setEnabled(false);
-                FenetreJeu.btnAjouter.setEnabled(false);
-                FenetreJeu.btnExecuter.setEnabled(false);
+                btnAjouter.setEnabled(false);
+                btnExecuter.setEnabled(false);
 
                 FenetreObstacle myWindow = new FenetreObstacle();
                 myWindow.setVisible(true);
+            }
+        });
+
+        btnAjouter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnPlacer.setEnabled(false);
+                btnAjouter.setEnabled(false);
+                btnExecuter.setEnabled(false);
+
+                FenetreAjouter myWindow = new FenetreAjouter();
+                myWindow.setVisible(true);
+            }
+        });
+
+        btnDefausser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnPlacer.setEnabled(false);
+                btnAjouter.setEnabled(false);
+                btnExecuter.setEnabled(false);
+
+                FenetreDefausser myWindow = new FenetreDefausser();
+                myWindow.setVisible(true);
+            }
+        });
+
+        btnExecuter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnPlacer.setEnabled(false);
+                btnAjouter.setEnabled(false);
+                btnExecuter.setEnabled(false);
+
+                executerProgramme(joueurActuel);
+            }
+        });
+
+        btnFinir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnAjouter.setEnabled(true);
+                btnExecuter.setEnabled(true);
+                btnPlacer.setEnabled(true);
+                Jeu.nextJoueur();
             }
         });
     }
@@ -521,7 +569,7 @@ public class FenetreJeu extends JFrame {
         }
     }
 
-    public static void updateItems(){
+    public static void updateItems() {
         items.removeAll();
         items.setVisible(false);
         items.setVisible(true);
@@ -594,6 +642,34 @@ public class FenetreJeu extends JFrame {
         compteurProgramme.setBounds(120, 390, 40, 40);
         compteurProgramme.setBackground(Color.BLACK);
         items.add(compteurProgramme);
+
+        BufferedImage imgDefausse = null;
+        try {
+            imgDefausse = ImageIO.read(new File("images/cartes/carteDefausse.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image dimgDefausse = imgDefausse.getScaledInstance(100, 137, Image.SCALE_SMOOTH);
+        ImageIcon iconDefausse = new ImageIcon(dimgDefausse);
+        JLabel defausse = new JLabel(iconDefausse);
+        defausse.setBounds(10, 487, 100, 137);
+        items.add(defausse);
+
+        compteurDefausse.setLayout(null);
+        compteurDefausse.setBounds(120, 537, 40, 40);
+        compteurDefausse.setBackground(Color.BLACK);
+        items.add(compteurDefausse);
+    }
+
+    public void executerProgramme(Joueur j){
+        if (j.instructions.size() != 0){
+            for(Carte c : j.instructions){
+                Carte next = j.instructions.poll();
+                j.defausse.add(next);
+                next.action(j.tortue);
+                updateFenetre();
+            }
+        }
     }
 }
 

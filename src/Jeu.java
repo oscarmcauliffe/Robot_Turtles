@@ -17,7 +17,7 @@ public class Jeu {
                 Plateau.initialisation();
                 Plateau.adapterPlateau();
 
-                Tortue rouge = new Tortue("rouge", 0, 1);
+                Tortue rouge = new Tortue("rouge", 6, 3);
                 Tortue bleu = new Tortue("bleu", 0, 5);
 
                 Joyau joyau1 = new Joyau(1,7, 3);
@@ -193,150 +193,11 @@ public class Jeu {
             carte++;
         }
         FenetreJeu.compteurProgramme.setText("x" + carte);
-    }
 
-
-
-    private static void ajouterProgramme(Joueur j) {
-        Scanner scanner = new Scanner(System.in);
-
-        boolean error = false;
-        while (!error) {
-            try {
-                if (j.main.size() > 0) {
-                    System.out.println("\nSélectionnez une carte de votre main.");
-                    int choix = scanner.nextInt();
-
-                    if (choix == 0 || choix == 1 || choix == 2 || choix == 3 || choix == 4) {
-                        j.instructions.add(j.getCarteMain(choix));
-                        j.main.remove(j.getCarteMain(choix));
-
-                        System.out.println("\nMain :");
-                        for (Carte c : j.main) {
-                            System.out.println(c.type);
-                        }
-
-                        boolean errorAjout = false;
-                        while (!errorAjout) {
-                            try {
-                                System.out.println("\nVoulez-vous ajouter une autre carte?");
-                                String ajout = scanner.next();
-                                if (ajout.equals("Oui")) {
-                                    errorAjout = true;
-                                } else if (ajout.equals("Non")) {
-                                    errorAjout = true;
-                                    error = true;
-                                } else {
-                                    throw new Exception();
-                                }
-                            } catch (Exception e) {
-                                System.out.println("\nVeuillez réessayer.");
-                            }
-                        }
-                    } else {
-                        throw new Exception();
-                    }
-                } else {
-                    System.out.println("\nVous n'avez plus de cartes.");
-                    error = true;
-                }
-            } catch (Exception e) {
-                System.out.println("\nVeuillez réessayer.");
-            }
+        int carteD = 0;
+        for(Carte i : j.defausse){
+            carteD++;
         }
-        defausserPlus(j);
-    }
-
-    private static void executerProgramme(Joueur j) {
-        Scanner scanner = new Scanner(System.in);
-
-        if (j.instructions.size() == 0) {
-            System.out.println("\nProgramme exécuté.");
-        } else {
-            while (j.instructions.size() > 0) {
-                try {
-                    Carte next = j.instructions.poll();
-                    j.defausse.add(next);
-                    next.action(j.tortue);
-                } catch (Exception e) {
-                    System.out.println("erreur programme");
-                    System.out.println(e);
-                }
-            }
-            System.out.println("\nProgramme exécuté.");
-        }
-        defausserPlus(j);
-    }
-
-    private static void defausser(Joueur j) {
-        boolean error = false;
-        while (!error) {
-            try {
-                if (j.main.size() > 0) {
-                    System.out.println("\nSélectionnez une carte de votre main.");
-                    Scanner scanner = new Scanner(System.in);
-                    int choix = scanner.nextInt();
-
-                    if (choix == 0 || choix == 1 || choix == 2 || choix == 3 || choix == 4) {
-                        j.defausse.add(j.getCarteMain(choix));
-                        j.main.remove(j.getCarteMain(choix));
-
-                        System.out.println("\nMain :");
-                        for (Carte c : j.main) {
-                            System.out.println(c.type);
-                        }
-
-                        boolean errorAjout = false;
-                        while (!errorAjout) {
-                            try {
-                                System.out.println("\nVoulez-vous defausser une autre carte?");
-                                String ajout = scanner.next();
-                                if (ajout.equals("Oui")) {
-                                    errorAjout = true;
-                                } else if (ajout.equals("Non")) {
-                                    errorAjout = true;
-                                    error = true;
-                                } else {
-                                    throw new Exception();
-                                }
-                            } catch (Exception e) {
-                                System.out.println("\nVeuillez réessayer.");
-                            }
-                        }
-                    } else {
-                        throw new Exception();
-                    }
-                } else {
-                    System.out.println("\nVous n'avez plus de cartes.");
-                    error = true;
-                }
-            } catch (Exception e) {
-                System.out.println("\nVeuillez réessayer.");
-            }
-        }
-    }
-
-    private static void defausserPlus(Joueur j){
-        Scanner scanner = new Scanner(System.in);
-
-        if (j.main.size() > 0) {
-            boolean errordefausse = false;
-            while (!errordefausse) {
-                try {
-                    System.out.println("\nVoulez-vous defausser des cartes?");
-                    String ajout = scanner.next();
-                    if (ajout.equals("Oui")) {
-                        defausser(j);
-                        errordefausse = true;
-                    } else if (ajout.equals("Non")) {
-                        errordefausse = true;
-                    } else {
-                        throw new Exception();
-                    }
-                } catch (Exception e) {
-                    System.out.println("\nVeuillez réessayer.");
-                }
-            }
-        }
+        FenetreJeu.compteurDefausse.setText("x" + carteD);
     }
 }

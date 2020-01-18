@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthStyleFactory;
 import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -64,5 +65,11 @@ public class Joueur {
 
     public Carte getCarteMain(int i){
         return this.main.get(i);
+    }
+
+    public void retirerTortue(){
+        int x = Plateau.getPosition(this.tortue)[0];
+        int y = Plateau.getPosition(this.tortue)[1];
+        Plateau.plateau[x][y] = new Tuile();
     }
 }
