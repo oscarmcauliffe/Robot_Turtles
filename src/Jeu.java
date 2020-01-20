@@ -17,7 +17,7 @@ public class Jeu {
                 Plateau.initialisation();
                 Plateau.adapterPlateau();
 
-                Tortue rouge = new Tortue("rouge", 6, 3);
+                Tortue rouge = new Tortue("rouge", 0, 1);
                 Tortue bleu = new Tortue("bleu", 0, 5);
 
                 Joyau joyau1 = new Joyau(1,7, 3);

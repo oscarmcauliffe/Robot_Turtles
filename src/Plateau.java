@@ -13,16 +13,6 @@ public class Plateau {
         }
     }
 
-    public static void affichage() {
-        System.out.print("\n\n\n\n\n\n");
-        for (int i = 0; i < 8; i++) {
-            System.out.print("\n");
-            for (int j = 0; j < 8; j++) {
-                System.out.print("|"+plateau[i][j].nom+"|");
-            }
-        }
-    }
-
     public static int[] getPosition(Tuile tuile){
         int[] position = new int[2];
 
