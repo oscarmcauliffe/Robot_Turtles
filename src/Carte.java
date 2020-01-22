@@ -29,7 +29,7 @@ public class Carte {
             }
         }
     }
-
+    //methode permettant de faire avaner une tortue dans la direction vers laquelle elle se trouve
     private static void avancer(Tortue t) {
         switch (t.orientation) {
             case 1: {
@@ -251,6 +251,7 @@ public class Carte {
         }
     }
 
+    //methode creant la carte permettant de tourner un tortue vers la droite
     private static void droite(Tortue t) {
         switch (t.orientation) {
             case 1: {
@@ -271,7 +272,7 @@ public class Carte {
             }
         }
     }
-
+    //methode creant la carte permettant de tourner un tortue vers la gauche
     private static void gauche(Tortue t) {
         switch (t.orientation) {
             case 1: {
@@ -293,6 +294,7 @@ public class Carte {
         }
     }
 
+    //creation de la carte laser avec ses proprietés.
     private static void laser(Tortue t) {
         switch (t.orientation) {
             case 1: {
