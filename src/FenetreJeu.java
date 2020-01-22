@@ -189,6 +189,7 @@ public class FenetreJeu extends JFrame {
                 btnPlacer.setEnabled(false);
                 btnAjouter.setEnabled(false);
                 btnExecuter.setEnabled(false);
+                btnDefausser.setEnabled(true);
                 FenetreJeu.actionValide = true;
 
                 Jeu.executerProgramme(joueurActuel);
