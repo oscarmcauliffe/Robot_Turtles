@@ -27,15 +27,18 @@ public class FenetreDefausser extends JFrame {
         texte.setBounds(20, 0, 420, 40);
         this.add(texte);
 
+        // liste permettant de choisisr la carte a defausser
         String[] listeDefausser = {"0", "1", "2", "3", "4"};
         comboDefausser = new JComboBox(listeDefausser);
         comboDefausser.setBounds(20, 40, 420, 40);
         this.add(comboDefausser);
 
+        //bouton de confirmation
         btnConfirmer = new JButton("Confirmer");
         btnConfirmer.setBounds(20, 90, 420, 40);
         this.add(btnConfirmer);
 
+        //bouton servant a revenir en arrière si l'on veut defausser d'autres cartes
         btnDefausserAutre = new JButton("Defausser une autre carte");
         btnDefausserAutre.setBounds(20, 40, 420, 40);
         this.add(btnDefausserAutre);
@@ -45,6 +48,7 @@ public class FenetreDefausser extends JFrame {
         erreur.setBounds(20, 130, 420, 40);
         this.add(erreur);
 
+        //bouton confirmant totalement la defausse et fermant la fenetre
         btnConfirmerDefausser = new JButton("Confirmer les defausses");
         btnConfirmerDefausser.setBounds(20, 90, 420, 40);
         this.add(btnConfirmerDefausser);
@@ -94,7 +98,7 @@ public class FenetreDefausser extends JFrame {
             if (comboDefausser.getSelectedIndex() >= j.main.size()) {
                 erreur.setText("Pas de carte à cet index dans la main.");
             } else {
-                j.defausse.add(j.getCarteMain(comboDefausser.getSelectedIndex()));
+                j.defausse.add(j.getCarteMain(comboDefausser.getSelectedIndex()));  // défausse la carte et "reactive les autres boutons"
                 j.main.remove(j.getCarteMain(comboDefausser.getSelectedIndex()));
 
                 valide = true;

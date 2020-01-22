@@ -14,7 +14,7 @@ public class FenetreObstacle extends JFrame {
     private JLabel erreur;
     private boolean valide = false;
 
-    public FenetreObstacle(){
+    public FenetreObstacle(){ // fenetre lié a l'action d'ajout d'obstacle
         super("Placer Obstacle");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(470, 370);
@@ -25,11 +25,13 @@ public class FenetreObstacle extends JFrame {
         type.setBounds(20, 0, 420, 40);
         this.add(type);
 
+        //permet de choisir l'obstacle a placer
         String[] obstacles = new String[] {"Pierre", "Glace", "Caisse"};
         comboOb = new JComboBox<String>(obstacles);
         comboOb.setBounds(20, 40, 420, 40);
         this.add(comboOb);
 
+        //permet de selectionner la ligne et la colonne
         JLabel coord= new JLabel("Sélectionnez une ligne et une colonne : ", SwingConstants.CENTER);
         coord.setBounds(20, 90, 420, 40);
         this.add(coord);
@@ -44,6 +46,7 @@ public class FenetreObstacle extends JFrame {
         comboColonne.setBounds(20, 190, 420, 40);
         this.add(comboColonne);
 
+        //bouton permettant de placer l'obstacle
         btnPlacer = new JButton("Placer");
         btnPlacer.setBounds(20, 240, 420, 40);
         this.add(btnPlacer);
@@ -72,6 +75,7 @@ public class FenetreObstacle extends JFrame {
             }
         });
 
+        //creation de l'evenement permettant de placer l'obstacle
         btnPlacer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,6 +106,7 @@ public class FenetreObstacle extends JFrame {
         }
     }
 
+    //Methode permettant de verifier s'il l'obstale demandé est toujours disponible
     private Obstacle containsObstacle(ArrayList<Obstacle> pioche, String type) {
         for (Obstacle o : pioche) {
             if (o.nom.equals(type)) {

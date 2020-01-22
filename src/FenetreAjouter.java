@@ -23,19 +23,23 @@ public class FenetreAjouter extends JFrame {
         this.setLocationRelativeTo(null);         //place la fenetre par rapport a une autre fenetre, la valeur nulle correspond au bureau
         this.getContentPane().setLayout(null);
 
+        //début de la creation des élements s'affichant sur la fenetre
         texte = new JLabel("Veuillez entrer votre choix", SwingConstants.CENTER);
         texte.setBounds(20, 0, 420, 40);
         this.add(texte);
 
+        //combobx permettant de choisir quel carte ajouter a la pile
         String[] listeAjouter = {"0", "1", "2", "3", "4"};
         comboAjouter = new JComboBox(listeAjouter);
         comboAjouter.setBounds(20, 40, 420, 40);
         this.add(comboAjouter);
 
+        //bouton de confirmation
         btnConfirmer = new JButton("Confirmer");
         btnConfirmer.setBounds(20, 90, 420, 40);
         this.add(btnConfirmer);
 
+        //bouton servant a revenir en arrière si l'on veut rajouter d'autres cartes
         btnAjouterAutre = new JButton("Ajouter une autre carte");
         btnAjouterAutre.setBounds(20, 40, 420, 40);
         this.add(btnAjouterAutre);
@@ -45,11 +49,14 @@ public class FenetreAjouter extends JFrame {
         erreur.setBounds(20, 130, 420, 40);
         this.add(erreur);
 
+        //bouton confirmant totalement l'ajout a la pile et fermant la fenetre
         btnConfirmerAjout = new JButton("Confirmer les ajouts");
         btnConfirmerAjout.setBounds(20, 90, 420, 40);
         this.add(btnConfirmerAjout);
         btnConfirmerAjout.setVisible(false);
+        //fin de la creation des élements s'affichant sur la fenetre
 
+        //permet de désactiver temporairement les boutons d'action tant que la fenetre d'ajout est ouverte
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -70,6 +77,7 @@ public class FenetreAjouter extends JFrame {
             }
         });
 
+        // création des events liés aux boutons
         btnConfirmer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,12 +118,13 @@ public class FenetreAjouter extends JFrame {
         });
     }
 
+    //méthode permettant d'ajouter les cartes et de vérifier s'il existe une carte a l'index donné
     private void ajouterProgramme(Joueur j) {
         if (j.main.size() > 0) {
             if (comboAjouter.getSelectedIndex() >= j.main.size()) {
                 erreur.setText("Pas de carte à cet index dans la main.");
             } else {
-                j.instructions.add(j.getCarteMain(comboAjouter.getSelectedIndex()));
+                j.instructions.add(j.getCarteMain(comboAjouter.getSelectedIndex())); // ajoute la carte et "reactive les autres bouton"
                 j.main.remove(j.getCarteMain(comboAjouter.getSelectedIndex()));
 
                 valide = true;

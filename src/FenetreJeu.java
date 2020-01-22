@@ -39,7 +39,7 @@ public class FenetreJeu extends JFrame {
         super("Robot Turtles");       // initialise le titre de le fenetre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(1300, 725);
-        //this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);       //permet de gerer la taille de la fenetre
+        //permet de gerer la taille de la fenetre
         this.setLocationRelativeTo(null);         //place la fenetre par rapport a une autre fenetre, la valeur nulle correspond au bureau
         this.getContentPane().setLayout(null);
 
@@ -49,6 +49,7 @@ public class FenetreJeu extends JFrame {
         //hand.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(hand);
 
+        //panel permettant de numeroter les cartes
         JPanel bandeauHand = new JPanel();
         bandeauHand.setLayout(null);
         bandeauHand.setBounds(378, 533, 480, 20);
@@ -109,6 +110,7 @@ public class FenetreJeu extends JFrame {
         actions.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(actions);
 
+        //Creation de tous les boutons d'action
         btnPlacer = new JButton("Placer Obstacle");
         btnPlacer.setBounds(85, 15, 200, 64);
 
@@ -144,6 +146,7 @@ public class FenetreJeu extends JFrame {
             }
         });
 
+        //creation des évenements liés aux boutons
         btnPlacer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,7 +154,6 @@ public class FenetreJeu extends JFrame {
                 btnAjouter.setEnabled(false);
                 btnExecuter.setEnabled(false);
                 btnDefausser.setEnabled(false);
-
                 FenetreObstacle myWindow = new FenetreObstacle();
                 myWindow.setVisible(true);
             }
@@ -217,6 +219,7 @@ public class FenetreJeu extends JFrame {
         myWindow.setVisible(true);
     }
 
+    //met a jours les elements dynamiques de la fenetre comme les cartes dans la main, le nom du joueurs...
     public static void updateFenetre() {
         updatePlateau(Plateau.plateau);
         updateMain();
@@ -224,7 +227,7 @@ public class FenetreJeu extends JFrame {
         updateItems();
     }
 
-    public static void updateJoueur() {
+    public static void updateJoueur() { //met a jour le nom du jour actuel
         joueur.removeAll();
         joueur.setVisible(false);
         joueur.setVisible(true);
@@ -235,7 +238,7 @@ public class FenetreJeu extends JFrame {
         joueur.add(nomJoueur);
     }
 
-    public static void updatePlateau(Tuile[][] p) {
+    public static void updatePlateau(Tuile[][] p) { //met a jour le plateau
         plateauImg.removeAll();
         plateauImg.setVisible(false);
         plateauImg.setVisible(true);
@@ -410,7 +413,7 @@ public class FenetreJeu extends JFrame {
         }
     }
 
-    public static void updateMain() {
+    public static void updateMain() { //met a jour la main du joueur
         hand.removeAll();
         hand.setVisible(false);
         hand.setVisible(true);
@@ -587,7 +590,7 @@ public class FenetreJeu extends JFrame {
         }
     }
 
-    public static void updateItems() {
+    public static void updateItems() { //met a jour les compteurs de murs
         items.removeAll();
         items.setVisible(false);
         items.setVisible(true);
