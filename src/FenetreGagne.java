@@ -12,6 +12,7 @@ public class FenetreGagne extends JFrame {
     private JLabel textePerdre;
     private JButton btnConfirmer;
 
+    //Cree la fenetre qui affiche si un joueur gagne ou perd
     public FenetreGagne(Joueur j, boolean g) {
         super("");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

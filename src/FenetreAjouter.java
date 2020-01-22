@@ -16,6 +16,7 @@ public class FenetreAjouter extends JFrame {
     private JButton btnConfirmerAjout;
     private static boolean valide = false;
 
+    //Cree la fenetre d'ajout de carte dans la file d'instructions
     public FenetreAjouter() {
         super("Ajouter au Programme");       // initialise le titre de le fenetre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);         //arrete le programme lorsque toutes les fenetres sont fermées

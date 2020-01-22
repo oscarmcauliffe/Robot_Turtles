@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+//cree la fenetre de jeu
 public class FenetreJeu extends JFrame {
 
     public static Joueur joueurActuel;
@@ -46,7 +47,6 @@ public class FenetreJeu extends JFrame {
         hand = new JPanel();
         hand.setLayout(null);
         hand.setBounds(368, 553, 500, 130);
-        //hand.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(hand);
 
         //panel permettant de numeroter les cartes
@@ -227,7 +227,7 @@ public class FenetreJeu extends JFrame {
         updateItems();
     }
 
-    public static void updateJoueur() { //met a jour le nom du jour actuel
+    public static void updateJoueur() { //met a jour et affiche le nom du jour actuel
         joueur.removeAll();
         joueur.setVisible(false);
         joueur.setVisible(true);
@@ -238,7 +238,7 @@ public class FenetreJeu extends JFrame {
         joueur.add(nomJoueur);
     }
 
-    public static void updatePlateau(Tuile[][] p) { //met a jour le plateau
+    public static void updatePlateau(Tuile[][] p) { //met a jour et affiche le plateau
         plateauImg.removeAll();
         plateauImg.setVisible(false);
         plateauImg.setVisible(true);
@@ -413,7 +413,7 @@ public class FenetreJeu extends JFrame {
         }
     }
 
-    public static void updateMain() { //met a jour la main du joueur
+    public static void updateMain() { //met a jour et affiche la main du joueur
         hand.removeAll();
         hand.setVisible(false);
         hand.setVisible(true);
@@ -590,7 +590,7 @@ public class FenetreJeu extends JFrame {
         }
     }
 
-    public static void updateItems() { //met a jour les compteurs de murs
+    public static void updateItems() { //met a jour et affiche les compteurs des murs
         items.removeAll();
         items.setVisible(false);
         items.setVisible(true);

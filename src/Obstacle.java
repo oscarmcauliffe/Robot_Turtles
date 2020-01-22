@@ -17,6 +17,7 @@ public class Obstacle extends Tuile{
         }
     }
 
+    //cree les obstacles pour chaque joueurs
     public static ArrayList<Obstacle> listeObstacles(){
         ArrayList<Obstacle> pioche = new ArrayList();
         for (int i = 0; i < 3; i++){

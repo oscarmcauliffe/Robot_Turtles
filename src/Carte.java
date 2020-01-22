@@ -2,12 +2,13 @@ import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 public class Carte {
-    String type;        //bleu, jaune, violette, laser
+    String type;        //correspond a la couleur : bleu, jaune, violette, laser
 
     public Carte(String t) {
         type = t;
     }
 
+    //Appel la fonction correspondant au type
     public void action(Tortue t) {
         switch (this.type) {
             case "bleu": {
@@ -38,7 +39,7 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0] - 1, Plateau.getPosition(t)[1]);
                     switch (devant.nom) {
                         case "joyau": {
-                            FenetreGagne myWindow = new FenetreGagne(Jeu.joueurActuel,true);
+                            FenetreGagne myWindow = new FenetreGagne(Jeu.joueurActuel, true);
                             myWindow.setVisible(true);
 
                             Jeu.joueurActuel.retirerTortue();
@@ -57,6 +58,16 @@ public class Carte {
                         }
 
                         case "caisse": {
+                            if (Plateau.getPosition(t)[0] == 6){
+                                t.retourner();
+                            }
+                            else if (Plateau.getTuile(Plateau.getPosition(t)[0] - 2, Plateau.getPosition(t)[1]).nom.equals("vide")){
+                                Plateau.deplacerTuile(devant, Plateau.getPosition(t)[0] - 2, Plateau.getPosition(t)[1]);
+                                Plateau.deplacerTuile(t, Plateau.getPosition(t)[0] - 1, Plateau.getPosition(t)[1]);
+                            }
+                            else{
+                                t.retourner();
+                            }
                             break;
                         }
 
@@ -82,7 +93,7 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0], Plateau.getPosition(t)[1] + 1);
                     switch (devant.nom) {
                         case "joyau": {
-                            FenetreGagne myWindow = new FenetreGagne(Jeu.joueurActuel,true);
+                            FenetreGagne myWindow = new FenetreGagne(Jeu.joueurActuel, true);
                             myWindow.setVisible(true);
 
                             Jeu.joueurActuel.retirerTortue();
@@ -101,6 +112,16 @@ public class Carte {
                         }
 
                         case "caisse": {
+                            if (Plateau.getPosition(t)[0] == 6){
+                                t.retourner();
+                            }
+                            else if (Plateau.getTuile(Plateau.getPosition(t)[0], Plateau.getPosition(t)[1] + 2).nom.equals("vide")){
+                                Plateau.deplacerTuile(devant, Plateau.getPosition(t)[0], Plateau.getPosition(t)[1] + 2);
+                                Plateau.deplacerTuile(t, Plateau.getPosition(t)[0], Plateau.getPosition(t)[1] + 1);
+                            }
+                            else{
+                                t.retourner();
+                            }
                             break;
                         }
 
@@ -126,7 +147,7 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0] + 1, Plateau.getPosition(t)[1]);
                     switch (devant.nom) {
                         case "joyau": {
-                            FenetreGagne myWindow = new FenetreGagne(Jeu.joueurActuel,true);
+                            FenetreGagne myWindow = new FenetreGagne(Jeu.joueurActuel, true);
                             myWindow.setVisible(true);
 
                             Jeu.joueurActuel.retirerTortue();
@@ -145,6 +166,16 @@ public class Carte {
                         }
 
                         case "caisse": {
+                            if (Plateau.getPosition(t)[0] == 6){
+                                t.retourner();
+                            }
+                            else if (Plateau.getTuile(Plateau.getPosition(t)[0] + 2, Plateau.getPosition(t)[1]).nom.equals("vide")){
+                                Plateau.deplacerTuile(devant, Plateau.getPosition(t)[0] + 2, Plateau.getPosition(t)[1]);
+                                Plateau.deplacerTuile(t, Plateau.getPosition(t)[0] + 1, Plateau.getPosition(t)[1]);
+                            }
+                            else{
+                                t.retourner();
+                            }
                             break;
                         }
 
@@ -170,7 +201,7 @@ public class Carte {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0], Plateau.getPosition(t)[1] - 1);
                     switch (devant.nom) {
                         case "joyau": {
-                            FenetreGagne myWindow = new FenetreGagne(Jeu.joueurActuel,true);
+                            FenetreGagne myWindow = new FenetreGagne(Jeu.joueurActuel, true);
                             myWindow.setVisible(true);
 
                             Jeu.joueurActuel.retirerTortue();
@@ -189,6 +220,16 @@ public class Carte {
                         }
 
                         case "caisse": {
+                            if (Plateau.getPosition(t)[0] == 6){
+                                t.retourner();
+                            }
+                            else if (Plateau.getTuile(Plateau.getPosition(t)[0], Plateau.getPosition(t)[1] - 2).nom.equals("vide")){
+                                Plateau.deplacerTuile(devant, Plateau.getPosition(t)[0], Plateau.getPosition(t)[1] - 2);
+                                Plateau.deplacerTuile(t, Plateau.getPosition(t)[0], Plateau.getPosition(t)[1] - 1);
+                            }
+                            else{
+                                t.retourner();
+                            }
                             break;
                         }
 
@@ -259,7 +300,7 @@ public class Carte {
                 do {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0] - i, Plateau.getPosition(t)[1]);
                     switch (devant.nom) {
-                        case "joyaux": {
+                        case "joyau": {
                             switch (Jeu.listeJoueurs.size()) {
                                 case 2: {
                                     t.retourner();
@@ -276,6 +317,7 @@ public class Carte {
                             break;
                         }
 
+                        case "caisse":
                         case "pierre": {
                             i = 0;
                             break;
@@ -287,10 +329,6 @@ public class Carte {
                             break;
                         }
 
-                        case "caisse": {
-                            break;
-                        }
-
                         case "vide": {
                             i++;
                         }
@@ -299,13 +337,13 @@ public class Carte {
                             if (devant instanceof Tortue) {
                                 switch (Jeu.listeJoueurs.size()) {
                                     case 2: {
-                                        t.retourner();
+                                        ((Tortue) devant).retourner();
                                         i = 0;
                                         break;
                                     }
                                     case 3:
                                     case 4: {
-                                        Plateau.deplacerTuile(t, t.positiondepart[0], t.positiondepart[1]);
+                                        Plateau.deplacerTuile(devant, ((Tortue) devant).positiondepart[0], ((Tortue) devant).positiondepart[1]);
                                         i = 0;
                                         break;
                                     }
@@ -314,7 +352,7 @@ public class Carte {
                             break;
                         }
                     }
-                } while (i != 0);
+                } while (i > 0);
                 break;
             }
             case 2: {
@@ -322,7 +360,7 @@ public class Carte {
                 do {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0], Plateau.getPosition(t)[1] + i);
                     switch (devant.nom) {
-                        case "joyaux": {
+                        case "joyau": {
                             switch (Jeu.listeJoueurs.size()) {
                                 case 2: {
                                     t.retourner();
@@ -339,6 +377,7 @@ public class Carte {
                             break;
                         }
 
+                        case "caisse":
                         case "pierre": {
                             i = 0;
                             break;
@@ -350,10 +389,6 @@ public class Carte {
                             break;
                         }
 
-                        case "caisse": {
-                            break;
-                        }
-
                         case "vide": {
                             i++;
                         }
@@ -362,13 +397,13 @@ public class Carte {
                             if (devant instanceof Tortue) {
                                 switch (Jeu.listeJoueurs.size()) {
                                     case 2: {
-                                        t.retourner();
+                                        ((Tortue) devant).retourner();
                                         i = 0;
                                         break;
                                     }
                                     case 3:
                                     case 4: {
-                                        Plateau.deplacerTuile(t, t.positiondepart[0], t.positiondepart[1]);
+                                        Plateau.deplacerTuile(devant, ((Tortue) devant).positiondepart[0], ((Tortue) devant).positiondepart[1]);
                                         i = 0;
                                         break;
                                     }
@@ -385,7 +420,7 @@ public class Carte {
                 do {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0] + i, Plateau.getPosition(t)[1]);
                     switch (devant.nom) {
-                        case "joyaux": {
+                        case "joyau": {
                             switch (Jeu.listeJoueurs.size()) {
                                 case 2: {
                                     t.retourner();
@@ -402,6 +437,7 @@ public class Carte {
                             break;
                         }
 
+                        case "caisse":
                         case "pierre": {
                             i = 0;
                             break;
@@ -413,10 +449,6 @@ public class Carte {
                             break;
                         }
 
-                        case "caisse": {
-                            break;
-                        }
-
                         case "vide": {
                             i++;
                         }
@@ -425,13 +457,14 @@ public class Carte {
                             if (devant instanceof Tortue) {
                                 switch (Jeu.listeJoueurs.size()) {
                                     case 2: {
-                                        t.retourner();
+                                        ((Tortue) devant).retourner();
                                         i = 0;
                                         break;
                                     }
                                     case 3:
                                     case 4: {
-                                        Plateau.deplacerTuile(t, t.positiondepart[0], t.positiondepart[1]);
+                                        System.out.println(((Tortue) devant).positiondepart[0]);
+                                        Plateau.deplacerTuile(devant, ((Tortue) devant).positiondepart[0], ((Tortue) devant).positiondepart[1]);
                                         i = 0;
                                         break;
                                     }
@@ -448,7 +481,7 @@ public class Carte {
                 do {
                     Tuile devant = Plateau.getTuile(Plateau.getPosition(t)[0], Plateau.getPosition(t)[1] - i);
                     switch (devant.nom) {
-                        case "joyaux": {
+                        case "joyau": {
                             switch (Jeu.listeJoueurs.size()) {
                                 case 2: {
                                     t.retourner();
@@ -465,6 +498,7 @@ public class Carte {
                             break;
                         }
 
+                        case "caisse":
                         case "pierre": {
                             i = 0;
                             break;
@@ -476,10 +510,6 @@ public class Carte {
                             break;
                         }
 
-                        case "caisse": {
-                            break;
-                        }
-
                         case "vide": {
                             i++;
                         }
@@ -488,13 +518,13 @@ public class Carte {
                             if (devant instanceof Tortue) {
                                 switch (Jeu.listeJoueurs.size()) {
                                     case 2: {
-                                        t.retourner();
+                                        ((Tortue) devant).retourner();
                                         i = 0;
                                         break;
                                     }
                                     case 3:
                                     case 4: {
-                                        Plateau.deplacerTuile(t, t.positiondepart[0], t.positiondepart[1]);
+                                        Plateau.deplacerTuile(devant, ((Tortue) devant).positiondepart[0], ((Tortue) devant).positiondepart[1]);
                                         i = 0;
                                         break;
                                     }

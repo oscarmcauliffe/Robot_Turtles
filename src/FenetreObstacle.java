@@ -95,18 +95,19 @@ public class FenetreObstacle extends JFrame {
             int x = Integer.parseInt(comboLigne.getSelectedItem().toString());
             int y = Integer.parseInt(comboColonne.getSelectedItem().toString());
 
-            if (Plateau.getTuile(x, y).nom == "vide") {
+            System.out.println(Plateau.placementValide(x,y));
+            if (Plateau.getTuile(x,y).nom == "vide" && Plateau.placementValide(x,y)) {
                 j.piocheObstacle.remove(obstacle);
                 Plateau.ajoutTuile(obstacle, x, y);
                 valide = true;
                 dispose();
             } else {
-                erreur.setText("Cette case est occupée!");
+                erreur.setText("Cette case est occupée ou cette case doit rester vide!");
             }
         }
     }
 
-    //Methode permettant de verifier s'il l'obstale demandé est toujours disponible
+    //Methode permettant de verifier si l'obstale demandé est toujours disponible
     private Obstacle containsObstacle(ArrayList<Obstacle> pioche, String type) {
         for (Obstacle o : pioche) {
             if (o.nom.equals(type)) {

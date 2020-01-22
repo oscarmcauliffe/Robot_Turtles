@@ -57,7 +57,7 @@ public class MenuAcceuil extends JFrame {
             btn3joueurs.setVisible(false);
             btn4joueurs.setVisible(false);
 
-            // crée l'evenement associe au bouton jouer qui affiche les bouton associe aux nombre de joueurs
+            //evenement associe au bouton jouer qui affiche les bouton associe aux nombre de joueurs
             btnJouer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -67,7 +67,7 @@ public class MenuAcceuil extends JFrame {
                     btn4joueurs.setVisible(true);                }
             });
 
-            //evement associe au bouton quitter qui permet de fermer la fenetre
+            //evenement associe au bouton quitter qui permet de fermer la fenetre
             btnQuitter.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

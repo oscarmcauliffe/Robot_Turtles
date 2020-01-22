@@ -16,6 +16,7 @@ public class FenetreDefausser extends JFrame {
     private JButton btnConfirmerDefausser;
     private static boolean valide = false;
 
+    //Cree la fenetre pour pouvoir defausser une carte de la main
     public FenetreDefausser() {
         super("Defausser une Carte");       // initialise le titre de le fenetre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);         //arrete le programme lorsque toutes les fenetres sont fermées
@@ -93,6 +94,7 @@ public class FenetreDefausser extends JFrame {
         });
     }
 
+    //Defausse la carte selectionniee dans le comboBox
     private void defausser(Joueur j) {
         if (j.main.size() > 0) {
             if (comboDefausser.getSelectedIndex() >= j.main.size()) {
