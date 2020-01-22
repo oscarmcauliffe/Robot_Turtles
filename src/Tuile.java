@@ -1,4 +1,4 @@
-//classe definissant les tuile par un nom
+//classe definissant les tuiles par un nom
 public class Tuile {
     String nom;
 
