@@ -16,7 +16,7 @@ public class FenetreAjouter extends JFrame {
     private JButton btnConfirmerAjout;
     private static boolean valide = false;
 
-    public FenetreAjouter(){
+    public FenetreAjouter() {
         super("Ajouter au Programme");       // initialise le titre de le fenetre
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);         //arrete le programme lorsque toutes les fenetres sont fermées
         this.setSize(470, 200);         //permet de gerer la taille de la fenetre
@@ -24,46 +24,45 @@ public class FenetreAjouter extends JFrame {
         this.getContentPane().setLayout(null);
 
         texte = new JLabel("Veuillez entrer votre choix", SwingConstants.CENTER);
-        texte.setBounds(20,0,420,40);
+        texte.setBounds(20, 0, 420, 40);
         this.add(texte);
 
-        String[] listeAjouter = {"0","1","2","3","4"};
+        String[] listeAjouter = {"0", "1", "2", "3", "4"};
         comboAjouter = new JComboBox(listeAjouter);
-        comboAjouter.setBounds(20,40,420,40);
+        comboAjouter.setBounds(20, 40, 420, 40);
         this.add(comboAjouter);
 
         btnConfirmer = new JButton("Confirmer");
-        btnConfirmer.setBounds(20,90,420,40);
+        btnConfirmer.setBounds(20, 90, 420, 40);
         this.add(btnConfirmer);
 
         btnAjouterAutre = new JButton("Ajouter une autre carte");
-        btnAjouterAutre.setBounds(20,40,420,40);
+        btnAjouterAutre.setBounds(20, 40, 420, 40);
         this.add(btnAjouterAutre);
         btnAjouterAutre.setVisible(false);
 
         erreur = new JLabel("", SwingConstants.CENTER);
-        erreur.setBounds(20,130,420,40);
+        erreur.setBounds(20, 130, 420, 40);
         this.add(erreur);
 
         btnConfirmerAjout = new JButton("Confirmer les ajouts");
-        btnConfirmerAjout.setBounds(20,90,420,40);
+        btnConfirmerAjout.setBounds(20, 90, 420, 40);
         this.add(btnConfirmerAjout);
         btnConfirmerAjout.setVisible(false);
 
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                if (valide){
+                if (valide) {
                     FenetreJeu.actionValide = true;
                     FenetreJeu.btnPlacer.setEnabled(false);
                     FenetreJeu.btnExecuter.setEnabled(false);
-                }
-                else {
+                } else {
                     FenetreJeu.btnPlacer.setEnabled(true);
                     FenetreJeu.btnExecuter.setEnabled(true);
                 }
-                FenetreJeu.btnDefausser.setEnabled(true);
                 FenetreJeu.btnAjouter.setEnabled(true);
+                FenetreJeu.btnDefausser.setEnabled(true);
                 FenetreJeu.updateFenetre();
             }
         });
@@ -89,17 +88,16 @@ public class FenetreAjouter extends JFrame {
         btnConfirmerAjout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               dispose();
+                dispose();
             }
         });
     }
 
     private void ajouterProgramme(Joueur j) {
-        if (j.main.size() > 0){
-            if(comboAjouter.getSelectedIndex() >= j.main.size()){
+        if (j.main.size() > 0) {
+            if (comboAjouter.getSelectedIndex() >= j.main.size()) {
                 erreur.setText("Pas de carte à cet index dans la main.");
-            }
-            else{
+            } else {
                 j.instructions.add(j.getCarteMain(comboAjouter.getSelectedIndex()));
                 j.main.remove(j.getCarteMain(comboAjouter.getSelectedIndex()));
 
@@ -111,8 +109,7 @@ public class FenetreAjouter extends JFrame {
                 btnConfirmer.setVisible(false);
                 comboAjouter.setVisible(false);
             }
-        }
-        else {
+        } else {
             erreur.setText("Votre main est vide.");
         }
         FenetreJeu.updateFenetre();

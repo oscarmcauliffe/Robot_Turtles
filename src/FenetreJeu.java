@@ -201,6 +201,8 @@ public class FenetreJeu extends JFrame {
                 btnAjouter.setEnabled(true);
                 btnExecuter.setEnabled(true);
                 btnPlacer.setEnabled(true);
+                btnDefausser.setEnabled(true);
+
                 Jeu.nextJoueur();
             }
         });
