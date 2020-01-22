@@ -6,6 +6,6 @@ public class Main {
 
     public static void main(String[] args) {
         MenuAcceuil myWindow = new MenuAcceuil();  //creation de le fenetre
-        myWindow.setVisible( true );
+        myWindow.setVisible(true);
     }
 }

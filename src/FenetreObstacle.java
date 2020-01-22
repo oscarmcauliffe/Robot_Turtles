@@ -57,6 +57,7 @@ public class FenetreObstacle extends JFrame {
             @Override
             public void windowClosed(WindowEvent e) {
                 if (valide){
+                    FenetreJeu.actionValide = true;
                     FenetreJeu.btnPlacer.setEnabled(false);
                     FenetreJeu.btnAjouter.setEnabled(false);
                     FenetreJeu.btnExecuter.setEnabled(false);
@@ -66,6 +67,7 @@ public class FenetreObstacle extends JFrame {
                     FenetreJeu.btnAjouter.setEnabled(true);
                     FenetreJeu.btnExecuter.setEnabled(true);
                 }
+                FenetreJeu.btnDefausser.setEnabled(true);
                 FenetreJeu.updateFenetre();
             }
         });
@@ -78,7 +80,7 @@ public class FenetreObstacle extends JFrame {
         });
     }
 
-    private void placerObstacle(Joueur j, String choix) {
+    public void placerObstacle(Joueur j, String choix) {
         erreur.setText("");
         Obstacle obstacle = containsObstacle(j.piocheObstacle, choix.toLowerCase());
 

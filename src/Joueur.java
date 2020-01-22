@@ -72,4 +72,41 @@ public class Joueur {
         int y = Plateau.getPosition(this.tortue)[1];
         Plateau.plateau[x][y] = new Tuile();
     }
+
+    public static void countItems(Joueur j) {
+        int p = 0;
+        int g = 0;
+        int c = 0;
+        for (Obstacle o : j.piocheObstacle) {
+            switch (o.nom) {
+                case "pierre": {
+                    p++;
+                    break;
+                }
+                case "glace": {
+                    g++;
+                    break;
+                }
+                case "caisse": {
+                    c++;
+                    break;
+                }
+            }
+        }
+        FenetreJeu.compteurPierre.setText("x" + p);
+        FenetreJeu.compteurGlace.setText("x" + g);
+        FenetreJeu.compteurCaisse.setText("x" + c);
+
+        int carte = 0;
+        for (Carte i : j.instructions) {
+            carte++;
+        }
+        FenetreJeu.compteurProgramme.setText("x" + carte);
+
+        int carteD = 0;
+        for (Carte i : j.defausse) {
+            carteD++;
+        }
+        FenetreJeu.compteurDefausse.setText("x" + carteD);
+    }
 }

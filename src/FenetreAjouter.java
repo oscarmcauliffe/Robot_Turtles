@@ -54,6 +54,7 @@ public class FenetreAjouter extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (valide){
+                    FenetreJeu.actionValide = true;
                     FenetreJeu.btnPlacer.setEnabled(false);
                     FenetreJeu.btnExecuter.setEnabled(false);
                 }
@@ -61,6 +62,7 @@ public class FenetreAjouter extends JFrame {
                     FenetreJeu.btnPlacer.setEnabled(true);
                     FenetreJeu.btnExecuter.setEnabled(true);
                 }
+                FenetreJeu.btnDefausser.setEnabled(true);
                 FenetreJeu.btnAjouter.setEnabled(true);
                 FenetreJeu.updateFenetre();
             }

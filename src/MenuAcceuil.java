@@ -12,7 +12,7 @@ public class MenuAcceuil extends JFrame {
 
         public MenuAcceuil() {
             super("Robot Turtles");       // initialise le titre de le fenetre
-            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);         //arrete le programme lorsque toutes les fenetres sont fermées
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);         //arrete le programme lorsque toutes les fenetres sont fermées
             this.setSize(620, 802);         //permet de gerer la taille de la fenetre
             this.setLocationRelativeTo(null);         //place la fenetre par rapport a une autre fenetre, la valeur nulle correspond au bureau
             this.getContentPane().setLayout(null);
@@ -33,6 +33,9 @@ public class MenuAcceuil extends JFrame {
             JButton btnJouer = new JButton( "Jouer" );
             btnJouer.setBounds(260,450,100,50);
 
+            JButton btnQuitter = new JButton( "Quitter" );
+            btnQuitter.setBounds(260,590,100,50);
+
             JButton btn2joueurs = new JButton( "2 joueurs" );
             btn2joueurs.setBounds(260,380,100,50);
 
@@ -45,6 +48,7 @@ public class MenuAcceuil extends JFrame {
 
             //contentPane.add( Title );
             fond.add(btnJouer);
+            fond.add(btnQuitter);
             fond.add(btn2joueurs);
             fond.add(btn3joueurs);
             fond.add(btn4joueurs);
@@ -60,6 +64,13 @@ public class MenuAcceuil extends JFrame {
                     btn2joueurs.setVisible(true);
                     btn3joueurs.setVisible(true);
                     btn4joueurs.setVisible(true);                }
+            });
+
+            btnQuitter.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose();
+                }
             });
 
             btn2joueurs.addActionListener(new ActionListener() {

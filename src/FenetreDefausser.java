@@ -53,9 +53,12 @@ public class FenetreDefausser extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                FenetreJeu.btnPlacer.setEnabled(true);
-                FenetreJeu.btnExecuter.setEnabled(true);
-                FenetreJeu.btnAjouter.setEnabled(true);
+                if (FenetreJeu.actionValide == false){
+                    FenetreJeu.btnPlacer.setEnabled(true);
+                    FenetreJeu.btnExecuter.setEnabled(true);
+                    FenetreJeu.btnAjouter.setEnabled(true);
+                }
+                FenetreJeu.btnDefausser.setEnabled(true);
                 FenetreJeu.updateFenetre();
             }
         });

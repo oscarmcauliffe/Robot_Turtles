@@ -4,6 +4,8 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.io.File;
@@ -24,6 +26,8 @@ public class FenetreJeu extends JFrame {
     public static JButton btnDefausser;
     public static JButton btnFinir;
 
+    public static boolean actionValide = false;
+
     public static JLabel compteurPierre = new JLabel("");
     public static JLabel compteurGlace = new JLabel("");
     public static JLabel compteurCaisse = new JLabel("");
@@ -33,7 +37,7 @@ public class FenetreJeu extends JFrame {
     public FenetreJeu() {
 
         super("Robot Turtles");       // initialise le titre de le fenetre
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //arrete le programme lorsque toutes les fenetres sont fermées
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(1300, 725);
         //this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);       //permet de gerer la taille de la fenetre
         this.setLocationRelativeTo(null);         //place la fenetre par rapport a une autre fenetre, la valeur nulle correspond au bureau
@@ -126,12 +130,19 @@ public class FenetreJeu extends JFrame {
         joueur.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(joueur);
 
-
         actions.add(btnPlacer);
         actions.add(btnAjouter);
         actions.add(btnExecuter);
         actions.add(btnDefausser);
         actions.add(btnFinir);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                MenuAcceuil myWindow = new MenuAcceuil();
+                myWindow.setVisible(true);
+            }
+        });
 
         btnPlacer.addActionListener(new ActionListener() {
             @Override
@@ -139,6 +150,7 @@ public class FenetreJeu extends JFrame {
                 btnPlacer.setEnabled(false);
                 btnAjouter.setEnabled(false);
                 btnExecuter.setEnabled(false);
+                btnDefausser.setEnabled(false);
 
                 FenetreObstacle myWindow = new FenetreObstacle();
                 myWindow.setVisible(true);
@@ -151,6 +163,7 @@ public class FenetreJeu extends JFrame {
                 btnPlacer.setEnabled(false);
                 btnAjouter.setEnabled(false);
                 btnExecuter.setEnabled(false);
+                btnDefausser.setEnabled(false);
 
                 FenetreAjouter myWindow = new FenetreAjouter();
                 myWindow.setVisible(true);
@@ -163,6 +176,7 @@ public class FenetreJeu extends JFrame {
                 btnPlacer.setEnabled(false);
                 btnAjouter.setEnabled(false);
                 btnExecuter.setEnabled(false);
+                btnDefausser.setEnabled(false);
 
                 FenetreDefausser myWindow = new FenetreDefausser();
                 myWindow.setVisible(true);
@@ -175,8 +189,9 @@ public class FenetreJeu extends JFrame {
                 btnPlacer.setEnabled(false);
                 btnAjouter.setEnabled(false);
                 btnExecuter.setEnabled(false);
+                FenetreJeu.actionValide = true;
 
-                executerProgramme(joueurActuel);
+                Jeu.executerProgramme(joueurActuel);
             }
         });
 
@@ -574,7 +589,7 @@ public class FenetreJeu extends JFrame {
         items.setVisible(false);
         items.setVisible(true);
 
-        Jeu.countItems(joueurActuel);
+        Joueur.countItems(joueurActuel);
 
         BufferedImage imgPierre = null;
         try {
@@ -659,17 +674,6 @@ public class FenetreJeu extends JFrame {
         compteurDefausse.setBounds(120, 537, 40, 40);
         compteurDefausse.setBackground(Color.BLACK);
         items.add(compteurDefausse);
-    }
-
-    public void executerProgramme(Joueur j){
-        if (j.instructions.size() != 0){
-            for(Carte c : j.instructions){
-                Carte next = j.instructions.poll();
-                j.defausse.add(next);
-                next.action(j.tortue);
-                updateFenetre();
-            }
-        }
     }
 }
 

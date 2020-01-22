@@ -1,8 +1,5 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.concurrent.SynchronousQueue;
+import java.lang.Object;
 
 public class Jeu {
     public static ArrayList<Joueur> listeJoueurs;
@@ -20,7 +17,7 @@ public class Jeu {
                 Tortue rouge = new Tortue("rouge", 0, 1);
                 Tortue bleu = new Tortue("bleu", 0, 5);
 
-                Joyau joyau1 = new Joyau(1,7, 3);
+                Joyau joyau1 = new Joyau(1, 7, 3);
 
                 listeJoueurs = new ArrayList<>();
 
@@ -43,9 +40,9 @@ public class Jeu {
                 Tortue bleu = new Tortue("bleu", 0, 3);
                 Tortue violet = new Tortue("violet", 0, 6);
 
-                Joyau joyau1 = new Joyau(1,7, 0);
-                Joyau joyau2 = new Joyau(2,7, 3);
-                Joyau joyau3 = new Joyau(3,7, 6);
+                Joyau joyau1 = new Joyau(1, 7, 0);
+                Joyau joyau2 = new Joyau(2, 7, 3);
+                Joyau joyau3 = new Joyau(3, 7, 6);
 
                 listeJoueurs = new ArrayList<>();
 
@@ -72,8 +69,8 @@ public class Jeu {
                 Tortue violet = new Tortue("violet", 0, 5);
                 Tortue vert = new Tortue("vert", 0, 7);
 
-                Joyau joyau1 = new Joyau(1,7, 1);
-                Joyau joyau2 = new Joyau(2,7, 6);
+                Joyau joyau1 = new Joyau(1, 7, 1);
+                Joyau joyau2 = new Joyau(2, 7, 6);
 
                 listeJoueurs = new ArrayList<>();
 
@@ -99,125 +96,58 @@ public class Jeu {
         }
     }
 
-    public static void nextJoueur(){
-        if (joueurCompteur == listeJoueurs.size()-1){
-            joueurCompteur = 0;
+    public static void nextJoueur() {
+        if (listeJoueurs.size() == 1){
+            FenetreGagne fenetrePerdu = new FenetreGagne(listeJoueurs.get(0),false);
+            fenetrePerdu.setVisible(true);
+            fenetre.dispose();
         }
         else{
-            joueurCompteur++;
+            if (joueurCompteur == listeJoueurs.size() - 1) {
+                joueurCompteur = 0;
+            } else {
+                joueurCompteur++;
+            }
+            tourJoueur(listeJoueurs.get(joueurCompteur));
         }
-        System.out.println(listeJoueurs.get(joueurCompteur).nom);
-        tourJoueur(listeJoueurs.get(joueurCompteur));
+    }
+
+    public static void nextJoueurGagne() {
+        if (listeJoueurs.size() == 1){
+            FenetreGagne fenetrePerdu = new FenetreGagne(listeJoueurs.get(0),false);
+            fenetrePerdu.setVisible(true);
+            fenetre.dispose();
+        }
+        else{
+            joueurCompteur--;
+            if (joueurCompteur == listeJoueurs.size() - 1) {
+                joueurCompteur = 0;
+            } else {
+                joueurCompteur++;
+            }
+            tourJoueur(listeJoueurs.get(joueurCompteur));
+        }
     }
 
     public static void tourJoueur(Joueur j) {
         joueurActuel = j;
         FenetreJeu.joueurActuel = j;
+        FenetreJeu.actionValide = false;
 
-        countItems(j);
+        j.countItems(j);
         j.completerMain();
 
         fenetre.updateFenetre();
-
-
-        /*while (listeJoueurs.size() > 1) {
-            for (Joueur h : listeJoueurs) {
-                joueurActuel = j;
-
-                Plateau.affichage();
-
-                System.out.println("\nTour de " + j.nom);
-
-                System.out.println("Tortue vers " + j.tortue.orientation);
-
-                countListeObstacle(j);
-
-                System.out.println("\nPioche : " + j.pioche.size() + " cartes.");
-
-                j.completerMain();
-
-                System.out.println("\nMain :");
-                for (Carte c : j.main) {
-                    System.out.println(c.type);
-                }
-
-                boolean error = false;
-                while (!error) {
-                    try {
-                        System.out.println("\n1. Ajouter au programme\n2. Executer le programme\n3. Placer un obstacle\n4. Defausser une/des carte(s)\n5. Passer son tour");
-                        Scanner scanner = new Scanner(System.in);
-                        int choix = scanner.nextInt();
-                        switch (choix) {
-                            case 1: {
-                                ajouterProgramme(j);
-                                error = true;
-                                break;
-                            }
-                            case 2: {
-                                executerProgramme(j);
-                                error = true;
-                                break;
-                            }
-                            case 3: {
-                                placerObstacle(j);
-                                error = true;
-                                break;
-                            }
-                            case 4: {
-                                defausser(j);
-                                error = true;
-                                break;
-                            }
-                            case 5: {
-                                error = true;
-                                break;
-                            }
-                            default: {
-                                throw new Exception();
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Entrez 1, 2, 3 ou 4.");
-                    }
-                }
-            }
-        }*/
     }
 
-    public static void countItems(Joueur j) {
-        int p = 0;
-        int g = 0;
-        int c = 0;
-        for (Obstacle o : j.piocheObstacle) {
-            switch (o.nom) {
-                case "pierre": {
-                    p++;
-                    break;
-                }
-                case "glace": {
-                    g++;
-                    break;
-                }
-                case "caisse": {
-                    c++;
-                    break;
-                }
+    public static void executerProgramme(Joueur j){
+        if (j.instructions.size() != 0){
+            for(Carte c : j.instructions){
+                Carte next = j.instructions.poll();
+                j.defausse.add(next);
+                next.action(j.tortue);
+                fenetre.updateFenetre();
             }
         }
-        FenetreJeu.compteurPierre.setText("x" + p);
-        FenetreJeu.compteurGlace.setText("x" + g);
-        FenetreJeu.compteurCaisse.setText("x" + c);
-
-        int carte = 0;
-        for(Carte i : j.instructions){
-            carte++;
-        }
-        FenetreJeu.compteurProgramme.setText("x" + carte);
-
-        int carteD = 0;
-        for(Carte i : j.defausse){
-            carteD++;
-        }
-        FenetreJeu.compteurDefausse.setText("x" + carteD);
     }
 }
