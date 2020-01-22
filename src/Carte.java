@@ -253,7 +253,7 @@ public class Carte {
         }
     }
 
-    //creation de la carte laser avec ses proprietés
+    //creation de la carte laser avec ses proprietés.
     private static void laser(Tortue t) {
         switch (t.orientation) {
             case 1: {
