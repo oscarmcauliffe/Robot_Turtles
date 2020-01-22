@@ -53,13 +53,16 @@ public class FenetreAjouter extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                System.out.println("test");
                 if (valide) {
                     FenetreJeu.actionValide = true;
                     FenetreJeu.btnPlacer.setEnabled(false);
                     FenetreJeu.btnExecuter.setEnabled(false);
+
                 } else {
                     FenetreJeu.btnPlacer.setEnabled(true);
                     FenetreJeu.btnExecuter.setEnabled(true);
+
                 }
                 FenetreJeu.btnAjouter.setEnabled(true);
                 FenetreJeu.btnDefausser.setEnabled(true);
@@ -88,6 +91,20 @@ public class FenetreAjouter extends JFrame {
         btnConfirmerAjout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (valide) {
+                    FenetreJeu.actionValide = true;
+                    FenetreJeu.btnPlacer.setEnabled(false);
+                    FenetreJeu.btnExecuter.setEnabled(false);
+
+                } else {
+                    FenetreJeu.btnPlacer.setEnabled(true);
+                    FenetreJeu.btnExecuter.setEnabled(true);
+
+                }
+                FenetreJeu.btnAjouter.setEnabled(true);
+                FenetreJeu.btnDefausser.setEnabled(true);
+                FenetreJeu.updateFenetre();
+
                 dispose();
             }
         });
