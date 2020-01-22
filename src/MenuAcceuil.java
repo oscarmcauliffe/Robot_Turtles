@@ -46,7 +46,7 @@ public class MenuAcceuil extends JFrame {
             btn4joueurs.setBounds(260,520,100,50);
 
 
-            //contentPane.add( Title );
+            //ajout de tous les boutons a la fenetre
             fond.add(btnJouer);
             fond.add(btnQuitter);
             fond.add(btn2joueurs);
@@ -57,6 +57,7 @@ public class MenuAcceuil extends JFrame {
             btn3joueurs.setVisible(false);
             btn4joueurs.setVisible(false);
 
+            // crée l'evenement associe au bouton jouer qui affiche les bouton associe aux nombre de joueurs
             btnJouer.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -66,6 +67,7 @@ public class MenuAcceuil extends JFrame {
                     btn4joueurs.setVisible(true);                }
             });
 
+            //evement associe au bouton quitter qui permet de fermer la fenetre
             btnQuitter.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -73,6 +75,7 @@ public class MenuAcceuil extends JFrame {
                 }
             });
 
+            //evenement lié aux boutons permettants de choisir le nombre de joueurs voulus
             btn2joueurs.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

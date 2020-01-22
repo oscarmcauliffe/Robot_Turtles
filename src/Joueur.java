@@ -15,6 +15,7 @@ public class Joueur {
     ArrayDeque<Carte> instructions;
     ArrayList<Carte> defausse;
 
+    //definit les attributs du joueur
     public Joueur(String n, Tortue t){
         nom = n;
         tortue = t;
@@ -26,6 +27,7 @@ public class Joueur {
         piocheObstacle = Obstacle.listeObstacles();
     }
 
+    //créer la pioche du joueur
     public ArrayDeque<Carte> nouvellePioche(){
         ArrayList<Carte> piocheliste = new ArrayList();
         for (int i = 0; i < 18; i++){
@@ -46,6 +48,7 @@ public class Joueur {
         return pioche;
     }
 
+    //permet de completer la main afin que le joueur ait 5 cartes
     public void completerMain(){
         if (this.main.size() < 5){
             do{
@@ -63,16 +66,19 @@ public class Joueur {
         }
     }
 
+    //getter permettant de recuperer la carte a l'index i dans la liste main
     public Carte getCarteMain(int i){
         return this.main.get(i);
     }
 
+    //retire la tortue lorsque le joueur a gagne
     public void retirerTortue(){
         int x = Plateau.getPosition(this.tortue)[0];
         int y = Plateau.getPosition(this.tortue)[1];
         Plateau.plateau[x][y] = new Tuile();
     }
 
+    //compte le nombre de mur disponible
     public static void countItems(Joueur j) {
         int p = 0;
         int g = 0;

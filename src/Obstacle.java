@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//classe definissant chaques type de mur par un nom (par defaut pierre)
 public class Obstacle extends Tuile{
 
     public Obstacle(String n){

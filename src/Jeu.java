@@ -8,6 +8,7 @@ public class Jeu {
 
     public static FenetreJeu fenetre;
 
+    //initialise une matrice en fonction du nombre de joueurs dans la partie et definit tous ce qu'il y a sur le plateau et lance le premier tour
     public static void nouvellePartie(int nombreJoueurs) {
         switch (nombreJoueurs) {
             case 2: {
@@ -95,7 +96,7 @@ public class Jeu {
             }
         }
     }
-
+    //Permet de passer a un autre joueur
     public static void nextJoueur() {
         if (listeJoueurs.size() == 1){
             FenetreGagne fenetrePerdu = new FenetreGagne(listeJoueurs.get(0),false);
@@ -111,7 +112,7 @@ public class Jeu {
             tourJoueur(listeJoueurs.get(joueurCompteur));
         }
     }
-
+    // dans une partie a plusieurs permet de passer au joueur suivant en prenant en compte la possibilité qu'un joueur ai gagné
     public static void nextJoueurGagne() {
         if (listeJoueurs.size() == 1){
             FenetreGagne fenetrePerdu = new FenetreGagne(listeJoueurs.get(0),false);
@@ -129,6 +130,7 @@ public class Jeu {
         }
     }
 
+    //definit le joueur actuel, complete sa main et met a jour les compteurs de ses murs
     public static void tourJoueur(Joueur j) {
         joueurActuel = j;
         FenetreJeu.joueurActuel = j;
@@ -140,6 +142,7 @@ public class Jeu {
         fenetre.updateFenetre();
     }
 
+    //execute les cartes placée dans la pile d'instruction
     public static void executerProgramme(Joueur j){
         if (j.instructions.size() != 0){
             for(Carte c : j.instructions){
